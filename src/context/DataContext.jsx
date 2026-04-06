@@ -7,8 +7,22 @@ const DataContext = createContext();
 
 const DataProvider = ({ children }) => {
 
-    const [books] = useState(booksData);
+    const [books, setBooks] = useState(booksData);
     const [users, setUsers] = useState([]);
+
+    // add book
+    const addBook = (bookData) => {
+        const newBook = {
+            id: "b_" + new Date().getTime(),
+            title: bookData.title,
+            author: bookData.author,
+            image: bookData.image,
+            genre: bookData.genre,
+            description: "",
+        };
+
+        setBooks((prev) => [newBook, ...prev]);
+    };
 
     // load users from localStorage
     useEffect(() => {
@@ -58,7 +72,7 @@ const DataProvider = ({ children }) => {
     };
 
     return (
-        <DataContext.Provider value={{ books, users, setUsers, registerUser }}>
+        <DataContext.Provider value={{ books, users, setUsers, registerUser, addBook }}>
             {children}
         </DataContext.Provider>
     );

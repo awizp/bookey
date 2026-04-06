@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { ThemeContext } from "../../../context/ThemeContext";
 
-const Sidebar = ({ isOpen, setIsOpen }) => {
+const Sidebar = ({ isOpen, setIsOpen, onAddBook }) => {
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -114,9 +114,12 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
                 </div>
 
-                {/* Add book */}
+                {/* add book */}
                 <div className="p-3 mt-5">
-                    <button className="w-full flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-xl text-sm active:scale-95 transition">
+                    <button
+                        onClick={onAddBook}
+                        className="w-full cursor-pointer mt-20 flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-xl text-sm active:scale-95 transition"
+                    >
                         <FaPlus />
                         Add Book
                     </button>
