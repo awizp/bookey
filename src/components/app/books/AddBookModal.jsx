@@ -59,6 +59,8 @@ const AddBookModal = ({ isOpen, setIsOpen, onSubmit }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
 
+      <title>Add a book in our platform | Bookey</title>
+
       {/* modal div */}
       <div className="w-full max-w-lg bg-white dark:bg-darkCard rounded-2xl shadow-lg p-5 relative">
 
@@ -94,7 +96,7 @@ const AddBookModal = ({ isOpen, setIsOpen, onSubmit }) => {
             }
             className="w-full p-3 rounded-xl bg-gray-100 dark:bg-gray-800 outline-none focus:ring-2 focus:ring-primary"
           />
-          
+
           <input
             placeholder="Image URL"
             value={form.image}
@@ -103,7 +105,7 @@ const AddBookModal = ({ isOpen, setIsOpen, onSubmit }) => {
             }
             className="w-full p-3 rounded-xl bg-gray-100 dark:bg-gray-800 outline-none focus:ring-2 focus:ring-primary"
           />
-          
+
           <div>
             <p className="text-sm font-medium mb-2">
               Select Genres
@@ -118,7 +120,7 @@ const AddBookModal = ({ isOpen, setIsOpen, onSubmit }) => {
                   <button
                     key={g}
                     onClick={() => toggleGenre(g)}
-                    className={`px-3 py-1 rounded-full text-xs transition ${ selected ? "bg-primary text-white" : "bg-gray-100 dark:bg-gray-800 hover:bg-primary/20"}`}
+                    className={`px-3 py-1 rounded-full text-xs transition ${selected ? "bg-primary text-white" : "bg-gray-100 dark:bg-gray-800 hover:bg-primary/20"}`}
                   >
                     {g}
                   </button>

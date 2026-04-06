@@ -40,7 +40,7 @@ const AppNavbar = ({ setIsOpen }) => {
                 </button>
 
                 <h2 className="font-semibold text-lg">
-                    Dashboard
+                    {currentUser?.name?.charAt(0).toUpperCase() + currentUser?.name?.slice(1)}
                 </h2>
             </div>
 

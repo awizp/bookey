@@ -31,6 +31,8 @@ const BookDetails = () => {
   return (
     <div className="h-screen flex overflow-hidden">
 
+      <title>Book details | Bookey</title>
+
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
 
       {/* main content */}

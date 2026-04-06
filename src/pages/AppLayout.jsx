@@ -18,7 +18,7 @@ const AppLayout = () => {
     const { books, addBook } = useContext(DataContext);
     const { currentUser } = useContext(AuthContext);
 
-    // dummy clubs
+    // random clubs data
     const clubs = [
         {
             id: 1,
@@ -60,7 +60,7 @@ const AppLayout = () => {
                 <div className="flex-1 overflow-y-auto bg-bgLight dark:bg-darkBg p-4">
 
                     <div className="mb-6 space-y-2">
-                        <h1 className="text-2xl font-bold text-primary">
+                        <h1 className="text-4xl font-bold text-primary capitalize">
                             Hello, {currentUser?.name} 👋
                         </h1>
                         <p className="text-sm text-textSecondary">
