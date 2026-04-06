@@ -115,10 +115,10 @@ const Sidebar = ({ isOpen, setIsOpen, onAddBook }) => {
                 </div>
 
                 {/* add book */}
-                <div className="p-3 mt-5">
+                <div className="w-full fixed bottom-10 p-3 mt-5">
                     <button
                         onClick={onAddBook}
-                        className="w-full cursor-pointer mt-20 flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-xl text-sm active:scale-95 transition"
+                        className="w-full cursor-pointer flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-xl text-sm active:scale-95 transition"
                     >
                         <FaPlus />
                         Add Book

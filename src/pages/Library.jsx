@@ -8,7 +8,8 @@ import { DataContext } from "../context/DataContext";
 
 const Library = () => {
 
-    const { books } = useContext(DataContext);
+    const { books, addBook } = useContext(DataContext);
+    const [openModal, setOpenModal] = useState(false);
 
     const [isOpen, setIsOpen] = useState(false);
     const [search, setSearch] = useState("");
@@ -48,7 +49,9 @@ const Library = () => {
     return (
         <div className="h-screen flex overflow-hidden">
 
-            <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
+            <title>Available books in our platform | Bookey</title>
+
+            <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} onAddBook={() => setOpenModal(true)} />
 
             {/* main component */}
             <div className="flex-1 flex flex-col">
@@ -62,7 +65,7 @@ const Library = () => {
                         <h1 className="text-4xl font-bold text-primary">
                             Library
                         </h1>
-                        <p className="text-sm text-textSecondary">
+                        <p className="text-sm text-gray-600 font-semibold">
                             Explore all books available in the platform
                         </p>
                     </div>
@@ -151,6 +154,7 @@ const Library = () => {
                     )}
 
                 </div>
+
             </div>
         </div>
     );

@@ -9,14 +9,12 @@ import ClubCard from "../components/app/clubs/ClubCard";
 import AddBookModal from "../components/app/books/AddBookModal";
 
 import { DataContext } from "../context/DataContext";
-import { AuthContext } from "../context/AuthContext";
 
-const AppLayout = () => {
+const Clubs = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
 
-    const { books, addBook } = useContext(DataContext);
-    const { currentUser } = useContext(AuthContext);
+    const { addBook } = useContext(DataContext);
 
     // random clubs data
     const clubs = [
@@ -43,7 +41,7 @@ const AppLayout = () => {
     return (
         <div className="h-screen flex overflow-hidden">
 
-            <title>Welcome to the dashboard | Bookey</title>
+            <title>Your clubs | Bookey</title>
 
             <Sidebar
                 isOpen={isOpen}
@@ -61,39 +59,11 @@ const AppLayout = () => {
 
                     <div className="mb-6 space-y-2">
                         <h1 className="text-4xl font-bold text-primary capitalize">
-                            Hello, {currentUser?.name} 👋
+                            Your Clubs
                         </h1>
                         <p className="text-sm text-gray-600 font-semibold">
-                            Discover books, build collections, and join clubs
+                            Discover and join clubs
                         </p>
-                    </div>
-
-                    {/* collections */}
-                    <div className="mb-8">
-                        <h2 className="text-lg font-semibold mb-3 text-primary">
-                            Your Collections
-                        </h2>
-
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                            <CollectionCard type="liked" />
-                            <CollectionCard
-                                type="create"
-                                onClick={() => console.log("Create playlist")}
-                            />
-                        </div>
-                    </div>
-
-                    {/* books */}
-                    <div className="mb-8">
-                        <h2 className="text-lg font-semibold mb-3 text-primary">
-                            Recommended Books
-                        </h2>
-
-                        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4">
-                            {books.slice(0, 8).map((book) => (
-                                <BookCard key={book.id} book={book} />
-                            ))}
-                        </div>
                     </div>
 
                     {/* clubs */}
@@ -130,4 +100,4 @@ const AppLayout = () => {
     );
 };
 
-export default AppLayout;
+export default Clubs;
