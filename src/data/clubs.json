@@ -1,0 +1,17 @@
+[
+  {
+    "id": "club1",
+    "name": "Self Growth Club",
+    "members": 120
+  },
+  {
+    "id": "club2",
+    "name": "Fiction Club",
+    "members": 95
+  },
+  {
+    "id": "club3",
+    "name": "Tech Readers Club",
+    "members": 60
+  }
+]

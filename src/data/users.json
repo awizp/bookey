@@ -1,0 +1,67 @@
+[
+    {
+        "id": "user_1",
+        "name": "Vishnu",
+        "username": "vishnu_user",
+        "email": "user@bookey.com",
+        "password": "123456",
+        "role": "user",
+        "readerType": "regular",
+        "likedGenres": [
+            "fiction",
+            "self help",
+            "business"
+        ],
+        "selectedBooks": [
+            "b1",
+            "b2",
+            "b6"
+        ],
+        "collections": [],
+        "clubsJoined": [],
+        "createdAt": "Mon Apr 06 2026 10:00:00"
+    },
+    {
+        "id": "user_2",
+        "name": "Mod Sugumar",
+        "username": "mod_sugumar",
+        "email": "mod@bookey.com",
+        "password": "123456",
+        "role": "moderator",
+        "readerType": "regular",
+        "likedGenres": [
+            "manga",
+            "action",
+            "fantasy"
+        ],
+        "selectedBooks": [
+            "b25",
+            "b26",
+            "b27"
+        ],
+        "collections": [],
+        "clubsJoined": [],
+        "createdAt": "Mon Apr 06 2026 10:10:00"
+    },
+    {
+        "id": "user_3",
+        "name": "Admin Anbu",
+        "username": "admin_anbu",
+        "email": "admin@bookey.com",
+        "password": "123456",
+        "role": "admin",
+        "readerType": "advanced",
+        "likedGenres": [
+            "business",
+            "philosophy"
+        ],
+        "selectedBooks": [
+            "b44",
+            "b48",
+            "b50"
+        ],
+        "collections": [],
+        "clubsJoined": [],
+        "createdAt": "Mon Apr 06 2026 10:20:00"
+    }
+]
