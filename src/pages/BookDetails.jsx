@@ -1,5 +1,5 @@
-import { useParams, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaHeart, FaPlus } from "react-icons/fa";
 
 import Sidebar from "../components/app/layout/Sidebar";
@@ -14,8 +14,9 @@ const BookDetails = () => {
   const navigate = useNavigate();
 
   const [isOpen, setIsOpen] = useState(false);
+  const [showSelect, setShowSelect] = useState(false);
 
-  const { books } = useContext(DataContext);
+  const { books, collections, addBookToCollection } = useContext(DataContext);
   const { currentUser } = useContext(AuthContext);
 
   const book = books.find((b) => b.id === id);
@@ -96,7 +97,9 @@ const BookDetails = () => {
                 {/* Add book */}
                 <div className="flex gap-3 mt-6 flex-col xs:flex-row">
 
-                  <button className="flex items-center gap-2 justify-center bg-primary text-white px-4 py-2 rounded-xl cursor-pointer">
+                  <button
+                    onClick={() => setShowSelect(!showSelect)}
+                    className="flex items-center gap-2 justify-center bg-primary text-white px-4 py-2 rounded-xl cursor-pointer">
                     <FaPlus />
                     Add to Playlist
                   </button>
@@ -107,6 +110,31 @@ const BookDetails = () => {
                   </button>
 
                 </div>
+
+                {showSelect && (
+                  <div className="mt-3 bg-white dark:bg-darkCard border-2 border-black/20 rounded-xl p-2 space-y-2 max-h-40 overflow-y-auto">
+
+                    {collections.length === 0 ? (
+                      <p className="text-xs text-gray-500 px-2">
+                        No playlists available
+                      </p>
+                    ) : (
+                      collections.map((col) => (
+                        <button
+                          key={col.id}
+                          onClick={() => {
+                            addBookToCollection(col.id, book);
+                            setShowSelect(false);
+                          }}
+                          className="w-full text-left px-3 py-2 rounded-lg hover:bg-primary/10 text-sm"
+                        >
+                          {col.name}
+                        </button>
+                      ))
+                    )}
+
+                  </div>
+                )}
 
               </div>
             </div>

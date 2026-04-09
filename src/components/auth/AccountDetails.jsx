@@ -95,7 +95,7 @@ const AccountDetails = ({ form, setForm, submit, prev, step = 4, totalSteps = 4,
                     )}
 
                     {/* next and prev btns */}
-                    <div className="w-full flex justify-between gap-3 mt-8">
+                    <div className="w-full flex flex-col sm:flex-row justify-between gap-3 mt-8">
 
                         <button
                             onClick={prev}
@@ -106,7 +106,7 @@ const AccountDetails = ({ form, setForm, submit, prev, step = 4, totalSteps = 4,
 
                         <button
                             onClick={handleSubmit}
-                            className="w-full cursor-pointer bg-primary text-white py-3 rounded-xl font-medium active:scale-95 transition"
+                            className="order-first sm:order-last w-full cursor-pointer bg-primary text-white py-3 rounded-xl font-medium active:scale-95 transition"
                         >
                             Create Account
                         </button>

@@ -1,99 +1,116 @@
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Sidebar from "../components/app/layout/Sidebar";
 import AppNavbar from "../components/app/layout/AppNavbar";
-
-import BookCard from "../components/app/books/BookCard";
-import CollectionCard from "../components/app/collections/CollectionCard";
-import ClubCard from "../components/app/clubs/ClubCard";
-import AddBookModal from "../components/app/books/AddBookModal";
+import CreateClubModal from "../components/app/clubs/CreateClubModal";
 
 import { DataContext } from "../context/DataContext";
+import { AuthContext } from "../context/AuthContext";
 
 const Clubs = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
 
-    const { addBook } = useContext(DataContext);
+    const { clubs, createClub, joinClub, leaveClub } = useContext(DataContext);
 
-    // random clubs data
-    const clubs = [
-        {
-            id: 1,
-            name: "Sci-Fi Explorers",
-            genre: "scifi",
-            members: 120
-        },
-        {
-            id: 2,
-            name: "Self Growth Club",
-            genre: "self help",
-            members: 80
-        },
-        {
-            id: 3,
-            name: "Manga World",
-            genre: "manga",
-            members: 200
-        },
-    ];
+    const { currentUser } = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     return (
         <div className="h-screen flex overflow-hidden">
 
-            <title>Your clubs | Bookey</title>
+            <title>Your clubs collections | Bookey</title>
 
-            <Sidebar
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
-                onAddBook={() => setOpenModal(true)}
-            />
+            <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
 
-            {/* main app */}
             <div className="flex-1 flex flex-col">
 
                 <AppNavbar setIsOpen={setIsOpen} />
 
-                {/* content */}
-                <div className="flex-1 overflow-y-auto bg-bgLight dark:bg-darkBg p-4">
-
+                <div className="flex-1 p-4 overflow-y-auto bg-bgLight dark:bg-darkBg">
                     <div className="mb-6 space-y-2">
-                        <h1 className="text-4xl font-bold text-primary capitalize">
-                            Your Clubs
-                        </h1>
-                        <p className="text-sm text-gray-600 font-semibold">
-                            Discover and join clubs
-                        </p>
+                        <h1 className="text-3xl font-bold text-primary">Clubs</h1>
                     </div>
 
-                    {/* clubs */}
-                    <div>
-                        <h2 className="text-lg font-semibold mb-3 text-primary">
-                            Clubs
-                        </h2>
+                    {currentUser.role === "moderator" && (
+                        <button
+                            onClick={() => setOpenModal(true)}
+                            className="mb-6 bg-primary text-white px-4 py-2 rounded-xl cursor-pointer font-semibold"
+                        >
+                            + Create Club
+                        </button>
+                    )}
 
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                            {clubs.map((club) => (
-                                <ClubCard
+                    {/* clubs list */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+
+                        {clubs.map((club) => {
+                            const isMember = club.members.includes(
+                                currentUser.id
+                            );
+
+                            return (
+                                <div
                                     key={club.id}
-                                    club={club}
-                                    onClick={() =>
-                                        console.log("Go to club", club.id)
-                                    }
-                                />
-                            ))}
-                        </div>
+                                    className="bg-white dark:bg-darkCard p-4 rounded-xl"
+                                >
+                                    <p className="font-semibold">{club.name}</p>
+                                    <p className="text-xs text-gray-500">
+                                        {club.genre}
+                                    </p>
+
+                                    <p className="text-xs mt-1">
+                                        {club.members.length} members
+                                    </p>
+
+                                    <div className="mt-3 flex gap-2">
+
+                                        {isMember ? (
+                                            <button
+                                                onClick={() =>
+                                                    leaveClub(club.id, currentUser)
+                                                }
+                                                className="text-xs border border-primary text-primary px-2 py-1 rounded"
+                                            >
+                                                Leave
+                                            </button>
+                                        ) : (
+                                            <button
+                                                onClick={() =>
+                                                    joinClub(club.id, currentUser)
+                                                }
+                                                className="text-xs bg-primary text-white px-2 py-1 rounded"
+                                            >
+                                                Join
+                                            </button>
+                                        )}
+
+                                        <button
+                                            onClick={() =>
+                                                navigate(`/app/clubs/${club.id}`)
+                                            }
+                                            className="text-xs border px-2 py-1 rounded"
+                                        >
+                                            View
+                                        </button>
+
+                                    </div>
+
+                                </div>
+                            );
+                        })}
+
                     </div>
-
                 </div>
-
             </div>
 
-            {/* add book btn */}
-            <AddBookModal
+            {/* club modal */}
+            <CreateClubModal
                 isOpen={openModal}
                 setIsOpen={setOpenModal}
-                onSubmit={addBook}
+                onCreate={(data) => createClub(data, currentUser)}
             />
 
         </div>

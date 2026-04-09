@@ -66,7 +66,7 @@ const GenreTypes = ({ form, setForm, next, prev, step = 2, totalSteps = 4 }) => 
                         </div>
                     </div>
 
-                    <div className="w-full flex justify-between gap-3 mt-8">
+                    <div className="w-full flex flex-col sm:flex-row justify-between gap-3 mt-8">
 
                         {/* back btn */}
                         <button
@@ -80,7 +80,7 @@ const GenreTypes = ({ form, setForm, next, prev, step = 2, totalSteps = 4 }) => 
                         <button
                             onClick={next}
                             disabled={form.likedGenres.length === 0}
-                            className="w-full cursor-pointer bg-primary text-white py-3 rounded-xl font-medium active:scale-95 transition disabled:opacity-50"
+                            className="order-first sm:order-last w-full cursor-pointer bg-primary text-white py-3 rounded-xl font-medium active:scale-95 transition disabled:opacity-50"
                         >
                             Continue
                         </button>

@@ -1,31 +1,28 @@
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { FaHeart } from "react-icons/fa";
 
 import Sidebar from "../components/app/layout/Sidebar";
 import AppNavbar from "../components/app/layout/AppNavbar";
-
-import CollectionCard from "../components/app/collections/CollectionCard";
-import AddBookModal from "../components/app/books/AddBookModal";
+import CreatePlaylistModal from "../components/app/collections/CreatePlaylistModal";
 
 import { DataContext } from "../context/DataContext";
 
 const Collections = () => {
+
+    const navigate = useNavigate();
+
     const [isOpen, setIsOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
 
-    const { addBook } = useContext(DataContext);
+    const { collections, createCollection } = useContext(DataContext);
 
     return (
         <div className="h-screen flex overflow-hidden">
 
-            <title>Your collections | Bookey</title>
+            <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
 
-            <Sidebar
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
-                onAddBook={() => setOpenModal(true)}
-            />
-
-            {/* main app */}
+            {/* main */}
             <div className="flex-1 flex flex-col">
 
                 <AppNavbar setIsOpen={setIsOpen} />
@@ -34,37 +31,90 @@ const Collections = () => {
                 <div className="flex-1 overflow-y-auto bg-bgLight dark:bg-darkBg p-4">
 
                     <div className="mb-6 space-y-2">
-                        <h1 className="text-4xl font-bold text-primary capitalize">
+                        <h1 className="text-3xl font-bold text-primary">
                             Your Collections
                         </h1>
                         <p className="text-sm text-gray-600 font-semibold">
-                            Build your own collections
+                            Organize your favorite books into playlists
                         </p>
                     </div>
 
-                    {/* collections */}
+                    {/* create playlist btn */}
+                    <div className="mb-6">
+                        <button
+                            onClick={() => setOpenModal(true)}
+                            className="bg-primary cursor-pointer text-white px-4 py-3 rounded-xl flex items-center gap-2 font-semibold"
+                        >
+                            + Create Playlist
+                        </button>
+                    </div>
+
+                    {/* default collection */}
                     <div className="mb-8">
-                        <h2 className="text-lg font-semibold mb-3 text-primary">
-                            Your Collections
-                        </h2>
+                        <h2 className="font-semibold mb-3">Default</h2>
 
                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                            <CollectionCard type="liked" />
-                            <CollectionCard
-                                type="create"
-                                onClick={() => console.log("Create playlist")}
-                            />
+
+                            <div className="bg-white dark:bg-darkCard p-4 rounded-xl flex items-center gap-3">
+                                <div className="w-10 h-10 bg-primary/20 text-primary flex items-center justify-center rounded-lg">
+                                    <FaHeart />
+                                </div>
+                                <div>
+                                    <p className="text-sm font-semibold">
+                                        Liked Books
+                                    </p>
+                                    <p className="text-xs text-textSecondary">
+                                        Your saved favorites
+                                    </p>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                </div>
 
+                    {/* user playlits */}
+                    <div>
+                        <h2 className="font-semibold mb-3">
+                            Your Playlists
+                        </h2>
+
+                        {collections.length === 0 ? (
+                            <p className="text-sm text-gray-500">
+                                No playlists created yet
+                            </p>
+                        ) : (
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+
+                                {collections.map((col) => (
+                                    <div
+                                        key={col.id}
+                                        onClick={() =>
+                                            navigate(`/app/collections/${col.id}`)
+                                        }
+                                        className="bg-white dark:bg-darkCard p-4 rounded-xl hover:shadow-sm transition cursor-pointer capitalize"
+                                    >
+                                        <p className="font-semibold text-sm">
+                                            {col.name}
+                                        </p>
+
+                                        <p className="text-xs text-textSecondary mt-1">
+                                            {col.books.length} books
+                                        </p>
+                                    </div>
+                                ))}
+
+                            </div>
+                        )}
+
+                    </div>
+                </div>
             </div>
 
-            {/* add book btn */}
-            <AddBookModal
+            {/* create playlist modal */}
+            <CreatePlaylistModal
                 isOpen={openModal}
                 setIsOpen={setOpenModal}
-                onSubmit={addBook}
+                onCreate={createCollection}
             />
 
         </div>

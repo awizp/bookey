@@ -54,7 +54,7 @@ const LikedBooks = ({
 
                     {/* book grid */}
                     <div className="max-h-100 overflow-y-auto pr-1">
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                        <div className="grid xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
 
                             {filteredBooks.map((book) => {
                                 const isSelected = form.selectedBooks.includes(book.id);
@@ -98,7 +98,7 @@ const LikedBooks = ({
                     </div>
 
                     {/* next and prev btns */}
-                    <div className="w-full flex justify-between gap-3 mt-8">
+                    <div className="w-full flex flex-col sm:flex-row justify-between gap-3 mt-8">
 
                         <button
                             onClick={prev}
@@ -110,7 +110,7 @@ const LikedBooks = ({
                         <button
                             onClick={next}
                             disabled={form.selectedBooks.length !== 3}
-                            className="w-full bg-primary cursor-pointer text-white py-3 rounded-xl font-medium active:scale-95 transition disabled:opacity-50"
+                            className="order-first sm:order-last w-full bg-primary cursor-pointer text-white py-3 rounded-xl font-medium active:scale-95 transition disabled:opacity-50"
                         >
                             Continue ({form.selectedBooks.length}/3)
                         </button>

@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { Landing, Signup, Login, AppLayout, BookDetails, Library, Collections, Clubs } from "./pages";
+import { Landing, Signup, Login, AppLayout, BookDetails, Library, Collections, Clubs, CollectionDetails, ClubDetails } from "./pages";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
@@ -24,22 +24,38 @@ function App() {
           <ProtectedRoute>
             <BookDetails />
           </ProtectedRoute>
-        } />
+        }
+        />
         <Route path="/app/library" element={
           <ProtectedRoute>
             <Library />
           </ProtectedRoute>
-        } />
+        }
+        />
         <Route path="/app/collections" element={
           <ProtectedRoute>
             <Collections />
           </ProtectedRoute>
-        } />
+        }
+        />
+        <Route path="/app/collections/:id" element={
+          <ProtectedRoute>
+            <CollectionDetails />
+          </ProtectedRoute>
+        }
+        />
         <Route path="/app/clubs" element={
           <ProtectedRoute>
             <Clubs />
           </ProtectedRoute>
-        } />
+        }
+        />
+        <Route path="/app/clubs/:id" element={
+          <ProtectedRoute>
+            <ClubDetails />
+          </ProtectedRoute>
+        }
+        />
 
       </Routes>
     </BrowserRouter>
