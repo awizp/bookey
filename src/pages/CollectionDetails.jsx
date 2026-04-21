@@ -7,38 +7,41 @@ import AppNavbar from "../components/app/layout/AppNavbar";
 import BookCard from "../components/app/books/BookCard";
 
 import { DataContext } from "../context/DataContext";
+import { AuthContext } from "../context/AuthContext";
+import { ToastContext } from "../context/ToastContext";
 
 const CollectionDetails = () => {
-
     const { id } = useParams();
     const navigate = useNavigate();
 
     const [isOpen, setIsOpen] = useState(false);
 
-    const { collections, setCollections } = useContext(DataContext);
+    const {
+        collections,
+        removeBookFromCollection
+    } = useContext(DataContext);
+
+    const { currentUser } = useContext(AuthContext);
+    const { showToast } = useContext(ToastContext);
 
     const collection = collections.find((c) => c.id === id);
 
-    if (!collection) {
-        return (
-            <div className="p-6">
-                <p>Collection not found</p>
-            </div>
-        );
+    if (!collection || collection.userId !== currentUser.id) {
+        showToast("Access denied", "error");
+        navigate("/app/collections");
+        return null;
     }
 
-    // remove book from collection
-    const removeBook = (bookId) => {
-        const updated = collections.map((col) =>
-            col.id === id
-                ? {
-                    ...col,
-                    books: col.books.filter((b) => b.id !== bookId),
-                }
-                : col
-        );
+    const handleBack = () => {
+        navigate(-1);
+    };
 
-        setCollections(updated);
+    const handleRemove = (bookId) => {
+
+        if (!window.confirm("Remove this book from playlist?")) return;
+
+        removeBookFromCollection(id, bookId);
+        showToast("Removed from playlist", "info");
     };
 
     return (
@@ -46,51 +49,48 @@ const CollectionDetails = () => {
 
             <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
 
-            {/* content */}
             <div className="flex-1 flex flex-col">
 
                 <AppNavbar setIsOpen={setIsOpen} />
 
-                <div className="flex-1 overflow-y-auto bg-bgLight dark:bg-darkBg p-4">
+                <div className="flex-1 overflow-y-auto bg-bgLight dark:bg-darkBg p-4 space-y-6">
 
-                    {/* back btn */}
                     <button
-                        onClick={() => navigate(-1)}
-                        className="flex items-center gap-2 text-sm mb-4 text-primary cursor-pointer font-semibold"
+                        onClick={handleBack}
+                        className="flex items-center gap-2 text-sm text-primary font-semibold"
                     >
                         <FaArrowLeft />
                         Back
                     </button>
 
-                    <div className="mb-6 space-y-2">
+                    <div className="bg-white dark:bg-darkCard p-5 rounded-2xl">
+
                         <h1 className="text-2xl font-bold capitalize">
-                            {collection.name}
+                            {collection.name || "Untitled Playlist"}
                         </h1>
-                        <p className="text-sm text-gray-600 font-semibold">
-                            {collection.books.length} books in this playlist
+
+                        <p className="text-sm text-gray-600 mt-1">
+                            {collection?.books?.length || 0} books
                         </p>
+
                     </div>
 
-                    {/* book details */}
                     {collection.books.length === 0 ? (
-                        <p className="text-sm text-gray-500">
+                        <div className="text-center text-sm text-gray-600 py-10">
                             No books added yet
-                        </p>
+                        </div>
                     ) : (
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
 
                             {collection.books.map((book) => (
                                 <div key={book.id} className="relative group">
 
                                     <BookCard book={book} />
 
-                                    {/* remove book btn */}
                                     <button
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            removeBook(book.id);
-                                        }}
-                                        className="absolute top-2 left-2 bg-white dark:bg-darkCard p-2 rounded-full shadow text-red-500 opacity-0 group-hover:opacity-100 transition"
+                                        onClick={() => handleRemove(book.id)}
+                                        className="absolute top-2 left-2 bg-white dark:bg-darkCard p-2 rounded-full shadow opacity-0 group-hover:opacity-100 transition text-red-500"
                                     >
                                         <FaTrash size={12} />
                                     </button>

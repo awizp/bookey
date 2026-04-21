@@ -69,7 +69,7 @@ const Sidebar = ({ isOpen, setIsOpen, onAddBook }) => {
             )}
 
             {/* desktop sidebar */}
-            <div className={`fixed md:static top-2 left-2 h-full w-64 bg-white dark:bg-darkCard z-50 transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full"} rounded-2xl md:translate-x-0`}>
+            <div className={`fixed md:static top-2 left-2 h-full w-64 bg-white dark:bg-darkCard z-50 transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-[120%]"} rounded-2xl md:rounded-tl-none md:rounded-bl-none md:translate-x-0`}>
                 <div className="h-16 flex items-center justify-between px-4 m-1 rounded-2xl">
                     <div
                         onClick={() => navigate("/")}

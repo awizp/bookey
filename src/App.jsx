@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { Landing, Signup, Login, AppLayout, BookDetails, Library, Collections, Clubs, CollectionDetails, ClubDetails } from "./pages";
+import { Landing, Signup, Login, AppLayout, BookDetails, Library, Collections, Clubs, CollectionDetails, ClubDetails, Moderation, Users } from "./pages";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
@@ -17,44 +17,47 @@ function App() {
         <Route path="/app" element={
           <ProtectedRoute>
             <AppLayout />
-          </ProtectedRoute>
-        }
+          </ProtectedRoute>}
         />
         <Route path="/app/book/:id" element={
           <ProtectedRoute>
             <BookDetails />
-          </ProtectedRoute>
-        }
+          </ProtectedRoute>}
         />
         <Route path="/app/library" element={
           <ProtectedRoute>
             <Library />
-          </ProtectedRoute>
-        }
+          </ProtectedRoute>}
         />
         <Route path="/app/collections" element={
           <ProtectedRoute>
             <Collections />
-          </ProtectedRoute>
-        }
+          </ProtectedRoute>}
         />
         <Route path="/app/collections/:id" element={
           <ProtectedRoute>
             <CollectionDetails />
-          </ProtectedRoute>
-        }
+          </ProtectedRoute>}
         />
         <Route path="/app/clubs" element={
           <ProtectedRoute>
             <Clubs />
-          </ProtectedRoute>
-        }
+          </ProtectedRoute>}
         />
         <Route path="/app/clubs/:id" element={
           <ProtectedRoute>
             <ClubDetails />
-          </ProtectedRoute>
-        }
+          </ProtectedRoute>}
+        />
+        <Route path="/app/moderation" element={
+          <ProtectedRoute>
+            <Moderation />
+          </ProtectedRoute>}
+        />
+        <Route path="/app/users" element={
+          <ProtectedRoute>
+            <Users />
+          </ProtectedRoute>}
         />
 
       </Routes>

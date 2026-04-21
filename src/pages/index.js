@@ -8,5 +8,7 @@ import Collections from "./Collections";
 import CollectionDetails from "./CollectionDetails";
 import Clubs from "./Clubs";
 import ClubDetails from "./ClubDetails";
+import Moderation from "./Moderation";
+import Users from "./Users";
 
-export { Landing, Signup, Login, AppLayout, BookDetails, Library, Collections, CollectionDetails, Clubs, ClubDetails };
+export { Landing, Signup, Login, AppLayout, BookDetails, Library, Collections, CollectionDetails, Clubs, ClubDetails, Moderation, Users };

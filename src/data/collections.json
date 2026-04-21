@@ -1,14 +1,16 @@
 [
   {
-    "id": "c1",
-    "name": "Self Help"
+    "id": "liked_1",
+    "name": "Liked Books",
+    "userId": "user_1",
+    "type": "liked",
+    "books": []
   },
   {
-    "id": "c2",
-    "name": "Fiction"
-  },
-  {
-    "id": "c3",
-    "name": "Productivity"
+    "id": "col_1",
+    "name": "Fantasy Picks",
+    "userId": "user_1",
+    "type": "custom",
+    "books": []
   }
 ]

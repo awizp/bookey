@@ -7,7 +7,7 @@ import { ReaderType, GenreTypes, LikedBooks, AccountDetails } from "../component
 import { Navbar, Footer } from "../components/landing";
 
 const Signup = () => {
-    const { books, registerUser } = useContext(DataContext);
+    const { books, users, registerUser, collections, setCollections } = useContext(DataContext);
     const navigate = useNavigate();
 
     const [step, setStep] = useState(1);
@@ -23,17 +23,39 @@ const Signup = () => {
         confirmPassword: "",
     });
 
-    // Submit final step
+    // user submit
+
     const handleSubmit = () => {
+
         if (form.password !== form.confirmPassword) {
             alert("Passwords do not match");
             return;
         }
 
-        // Register user
-        registerUser(form);
+        // check existing user
+        const exists = users.find((u) => u.email === form.email);
 
-        // Redirect to login
+        if (exists) {
+            alert("User already exists. Please login.");
+            navigate("/login");
+            return;
+        }
+
+        // create user
+        const newUser = registerUser(form);
+
+        // create liked collection for user
+        const likedCollection = {
+            id: "liked_" + newUser.id,
+            name: "Liked Books",
+            userId: newUser.id,
+            type: "liked",
+            books: [],
+        };
+
+        setCollections((prev) => [...prev, likedCollection]);
+
+        // redirect
         navigate("/login");
     };
 
@@ -45,27 +67,45 @@ const Signup = () => {
 
             <div className="w-full py-5">
                 <div className="container mx-auto px-4 md:px-0">
+
                     <div className="space-y-3">
 
-                        {/* header */}
-                        <div className="text-center mt-6 mb-15">
+                        <div className="text-center mt-6 mb-10">
                             <h1 className="text-2xl font-bold text-primary">
                                 Start Your Reading Journey!
                             </h1>
+
                             <p className="text-gray-500 text-sm mt-2">
                                 Tell us your preferences and we’ll build a personalized reading experience just for you.
                             </p>
+
+                            {/* login navigate */}
+                            <p className="text-sm text-gray-600 mt-3">
+                                Already have an account?{" "}
+                                <span
+                                    onClick={() => navigate("/login")}
+                                    className="text-primary font-semibold cursor-pointer"
+                                >
+                                    Login
+                                </span>
+                            </p>
+
                         </div>
 
-
                         <div className="w-full flex flex-col md:flex-row gap-10 justify-center md:justify-between items-center">
+
                             {/* banner */}
                             <div className="w-full flex justify-center items-center">
-                                <img src="/login-banner.svg" alt="Login banner" className="w-full h-full object-contain" />
+                                <img
+                                    src="/login-banner.svg"
+                                    alt="Signup banner"
+                                    className="w-full h-full object-contain"
+                                />
                             </div>
 
-                            {/* steps */}
+                            {/* content steps */}
                             <div className="w-full">
+
                                 {step === 1 && (
                                     <ReaderType
                                         form={form}
@@ -109,10 +149,13 @@ const Signup = () => {
                                         totalSteps={4}
                                     />
                                 )}
+
                             </div>
+
                         </div>
 
                     </div>
+
                 </div>
             </div>
 

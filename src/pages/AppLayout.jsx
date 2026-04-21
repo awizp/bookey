@@ -7,6 +7,9 @@ import BookCard from "../components/app/books/BookCard";
 import CollectionCard from "../components/app/collections/CollectionCard";
 import ClubCard from "../components/app/clubs/ClubCard";
 import AddBookModal from "../components/app/books/AddBookModal";
+import UserDashboard from "../components/app/dashboard/UserDashboard";
+import ModeratorDashboard from "../components/app/dashboard/ModeratorDashboard";
+import AdminDashboard from "../components/app/dashboard/AdminDashboard";
 
 import { DataContext } from "../context/DataContext";
 import { AuthContext } from "../context/AuthContext";
@@ -59,61 +62,11 @@ const AppLayout = () => {
                 {/* content */}
                 <div className="flex-1 overflow-y-auto bg-bgLight dark:bg-darkBg p-4">
 
-                    <div className="mb-6 space-y-2">
-                        <h1 className="text-4xl font-bold text-primary capitalize">
-                            Hello, {currentUser?.name} 👋
-                        </h1>
-                        <p className="text-sm text-gray-600 font-semibold">
-                            Discover books, build collections, and join clubs
-                        </p>
-                    </div>
+                    {currentUser?.role === "admin" && <AdminDashboard />}
 
-                    {/* collections */}
-                    <div className="mb-8">
-                        <h2 className="text-lg font-semibold mb-3 text-primary">
-                            Your Collections
-                        </h2>
+                    {currentUser?.role === "moderator" && <ModeratorDashboard />}
 
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                            <CollectionCard type="liked" />
-                            <CollectionCard
-                                type="create"
-                                onClick={() => console.log("Create playlist")}
-                            />
-                        </div>
-                    </div>
-
-                    {/* books */}
-                    <div className="mb-8">
-                        <h2 className="text-lg font-semibold mb-3 text-primary">
-                            Recommended Books
-                        </h2>
-
-                        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4">
-                            {books.slice(0, 8).map((book) => (
-                                <BookCard key={book.id} book={book} />
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* clubs */}
-                    <div>
-                        <h2 className="text-lg font-semibold mb-3 text-primary">
-                            Clubs
-                        </h2>
-
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                            {clubs.map((club) => (
-                                <ClubCard
-                                    key={club.id}
-                                    club={club}
-                                    onClick={() =>
-                                        console.log("Go to club", club.id)
-                                    }
-                                />
-                            ))}
-                        </div>
-                    </div>
+                    {currentUser?.role === "user" && <UserDashboard />}
 
                 </div>
 
