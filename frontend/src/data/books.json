@@ -1,0 +1,567 @@
+[
+  {
+    "id": "b1",
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "genre": [
+      "self help",
+      "business"
+    ],
+    "image": "https://m.media-amazon.com/images/I/81kg51XRc1L._SY425_.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b2",
+    "title": "Deep Work",
+    "author": "Cal Newport",
+    "genre": [
+      "productivity",
+      "self help"
+    ],
+    "image": "https://m.media-amazon.com/images/I/31mN8iz1QML._SY445_SX342_FMwebp_.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b3",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "genre": [
+      "fiction",
+      "adventure"
+    ],
+    "image": "https://m.media-amazon.com/images/I/51Ej3pe9WsL._SY445_SX342_FMwebp_.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b4",
+    "title": "Ikigai",
+    "author": "Héctor García",
+    "genre": [
+      "self help",
+      "spirituality"
+    ],
+    "image": "https://m.media-amazon.com/images/I/41nS26MN37L._SY445_SX342_FMwebp_.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b5",
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert Kiyosaki",
+    "genre": [
+      "business"
+    ],
+    "image": "https://m.media-amazon.com/images/I/51HqycCxMRL._SY445_SX342_FMwebp_.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b6",
+    "title": "Think and Grow Rich",
+    "author": "Napoleon Hill",
+    "genre": [
+      "business"
+    ],
+    "image": "https://m.media-amazon.com/images/I/51Hfv2MfNGL._SY445_SX342_FMwebp_.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b7",
+    "title": "Dune",
+    "author": "Frank Herbert",
+    "genre": [
+      "scifi",
+      "adventure"
+    ],
+    "image": "https://m.media-amazon.com/images/I/410hw6Q5a9L._SY445_SX342_FMwebp_.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b8",
+    "title": "1984",
+    "author": "George Orwell",
+    "genre": [
+      "fiction",
+      "classics"
+    ],
+    "image": "https://m.media-amazon.com/images/I/41U8k2KOgFL._SY300_SX300_QL70_FMwebp_.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b9",
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "genre": [
+      "romance",
+      "classics"
+    ],
+    "image": "https://m.media-amazon.com/images/I/51JkDEpHUQL._SY445_SX342_FMwebp_.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b10",
+    "title": "The Hobbit",
+    "author": "J.R.R. Tolkien",
+    "genre": [
+      "fantasy",
+      "adventure"
+    ],
+    "image": "https://m.media-amazon.com/images/I/519IWFhcN5L._SY445_SX342_FMwebp_.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b11",
+    "title": "Harry Potter 1",
+    "author": "J.K. Rowling",
+    "genre": [
+      "fantasy",
+      "young adult"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/7984916-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b12",
+    "title": "Sherlock Holmes",
+    "author": "Arthur Conan Doyle",
+    "genre": [
+      "mystery",
+      "crime"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8225631-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b13",
+    "title": "The Silent Patient",
+    "author": "Alex Michaelides",
+    "genre": [
+      "thriller"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/9259252-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b14",
+    "title": "It",
+    "author": "Stephen King",
+    "genre": [
+      "horror"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8231856-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b15",
+    "title": "Dracula",
+    "author": "Bram Stoker",
+    "genre": [
+      "horror",
+      "classics"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8235116-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b16",
+    "title": "The Power of Now",
+    "author": "Eckhart Tolle",
+    "genre": [
+      "spirituality"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8231991-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b17",
+    "title": "Start With Why",
+    "author": "Simon Sinek",
+    "genre": [
+      "business"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375047-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b18",
+    "title": "Zero to One",
+    "author": "Peter Thiel",
+    "genre": [
+      "business"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375048-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b19",
+    "title": "Hooked",
+    "author": "Nir Eyal",
+    "genre": [
+      "business"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375049-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b20",
+    "title": "Make Time",
+    "author": "Jake Knapp",
+    "genre": [
+      "productivity"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375050-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b21",
+    "title": "Essentialism",
+    "author": "Greg McKeown",
+    "genre": [
+      "self help"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375051-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b22",
+    "title": "The Lean Startup",
+    "author": "Eric Ries",
+    "genre": [
+      "business"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375052-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b23",
+    "title": "Grit",
+    "author": "Angela Duckworth",
+    "genre": [
+      "self help"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375053-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b24",
+    "title": "Mindset",
+    "author": "Carol Dweck",
+    "genre": [
+      "self help"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375054-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b25",
+    "title": "Naruto Vol 1",
+    "author": "Masashi Kishimoto",
+    "genre": [
+      "manga",
+      "action"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/6979862-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b26",
+    "title": "Attack on Titan",
+    "author": "Hajime Isayama",
+    "genre": [
+      "manga",
+      "action"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/6979863-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b27",
+    "title": "Solo Leveling",
+    "author": "Chugong",
+    "genre": [
+      "manhwa",
+      "action"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/12547191-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b28",
+    "title": "Tower of God",
+    "author": "SIU",
+    "genre": [
+      "manhwa",
+      "fantasy"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/12547192-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b29",
+    "title": "The Martian",
+    "author": "Andy Weir",
+    "genre": [
+      "scifi"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375055-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b30",
+    "title": "Ready Player One",
+    "author": "Ernest Cline",
+    "genre": [
+      "scifi"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375056-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b31",
+    "title": "Gone Girl",
+    "author": "Gillian Flynn",
+    "genre": [
+      "thriller"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375057-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b32",
+    "title": "The Girl with the Dragon Tattoo",
+    "author": "Stieg Larsson",
+    "genre": [
+      "crime"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375058-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b33",
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "genre": [
+      "classics"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8225261-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b34",
+    "title": "The Catcher in the Rye",
+    "author": "J.D. Salinger",
+    "genre": [
+      "classics"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8225262-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b35",
+    "title": "The Fault in Our Stars",
+    "author": "John Green",
+    "genre": [
+      "romance",
+      "young adult"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375059-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b36",
+    "title": "Twilight",
+    "author": "Stephenie Meyer",
+    "genre": [
+      "romance"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375060-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b37",
+    "title": "The Notebook",
+    "author": "Nicholas Sparks",
+    "genre": [
+      "romance"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375061-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b38",
+    "title": "The Shining",
+    "author": "Stephen King",
+    "genre": [
+      "horror"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8231857-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b39",
+    "title": "Pet Sematary",
+    "author": "Stephen King",
+    "genre": [
+      "horror"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8231858-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b40",
+    "title": "The Road",
+    "author": "Cormac McCarthy",
+    "genre": [
+      "fiction"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375062-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b41",
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "genre": [
+      "classics"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/7222247-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b42",
+    "title": "War and Peace",
+    "author": "Leo Tolstoy",
+    "genre": [
+      "classics"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/7222248-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b43",
+    "title": "Crime and Punishment",
+    "author": "Dostoevsky",
+    "genre": [
+      "crime",
+      "classics"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/7222249-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b44",
+    "title": "Meditations",
+    "author": "Marcus Aurelius",
+    "genre": [
+      "philosophy"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8231992-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b45",
+    "title": "The Subtle Art of Not Giving a F*ck",
+    "author": "Mark Manson",
+    "genre": [
+      "self help"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375063-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b46",
+    "title": "Can't Hurt Me",
+    "author": "David Goggins",
+    "genre": [
+      "self help"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375064-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b47",
+    "title": "12 Rules for Life",
+    "author": "Jordan Peterson",
+    "genre": [
+      "self help"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375065-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b48",
+    "title": "The Psychology of Money",
+    "author": "Morgan Housel",
+    "genre": [
+      "business"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375066-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b49",
+    "title": "The 5 AM Club",
+    "author": "Robin Sharma",
+    "genre": [
+      "self help"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8375067-L.jpg",
+    "pages": 250,
+    "synopsis": "A compelling book that explores its theme deeply and keeps readers engaged throughout the journey."
+  },
+  {
+    "id": "b50",
+    "title": "Man's Search for Meaning",
+    "author": "Viktor Frankl",
+    "genre": [
+      "philosophy"
+    ],
+    "image": "https://covers.openlibrary.org/b/id/8231993-L.jpg"
+  }
+]
