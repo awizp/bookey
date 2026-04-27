@@ -23,6 +23,15 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// using cors to fetch the backend
+app.use(cors({
+    origin: [
+        "http://localhost:5173",
+        "https://bookey-app.vercel.app"
+    ],
+    credentials: true
+}));
+
 // connect database
 connectDB();
 

@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = `${import.meta.env.BASE_API}/api`;
 
 // get token from localStorage
 const getToken = () => {
