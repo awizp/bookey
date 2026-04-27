@@ -34,26 +34,38 @@ const Clubs = () => {
         (club) => !club.members.includes(currentUser.id) && club.createdBy !== currentUser.id
     );
 
-    const handleJoin = (clubId) => {
+    const handleJoin = async (clubId) => {
         if (isBlocked) return showToast("You are blocked temporarily", "error");
-        joinClub(clubId, currentUser);
-        showToast("Joined club", "success");
+        try {
+            await joinClub(clubId, currentUser);
+            showToast("Joined club", "success");
+        } catch (error) {
+            showToast(error.message, "error");
+        }
     };
 
-    const handleLeave = (clubId) => {
+    const handleLeave = async (clubId) => {
         if (isBlocked) return showToast("You are blocked temporarily", "error");
-        leaveClub(clubId, currentUser);
-        showToast("Left club", "info");
+        try {
+            await leaveClub(clubId, currentUser);
+            showToast("Left club", "info");
+        } catch (error) {
+            showToast(error.message, "error");
+        }
     };
 
     const handleView = (clubId) => {
         navigate(`/app/clubs/${clubId}`);
     };
 
-    const handleCreateClub = (data) => {
+    const handleCreateClub = async (data) => {
         if (isBlocked) return showToast("You are blocked temporarily", "error");
-        createClub(data, currentUser);
-        showToast("Club created", "success");
+        try {
+            await createClub(data, currentUser);
+            showToast("Club created", "success");
+        } catch (error) {
+            showToast(error.message, "error");
+        }
     };
 
     return (
@@ -118,7 +130,7 @@ const Clubs = () => {
 
                                             <p className="font-semibold">{club.name}</p>
                                             <p className="text-xs text-gray-600">{club.genre}</p>
-                                            <p className="text-xs mt-1">{club.members.length} members</p>
+                                            <p className="text-xs mt-1">{club.memberCount || club.members.length} members</p>
 
                                             <div className="mt-3 flex gap-2">
 
@@ -167,7 +179,7 @@ const Clubs = () => {
 
                                         <p className="font-semibold">{club.name}</p>
                                         <p className="text-xs text-gray-600">{club.genre}</p>
-                                        <p className="text-xs mt-1">{club.members.length} members</p>
+                                        <p className="text-xs mt-1">{club.memberCount || club.members.length} members</p>
 
                                         <div className="mt-3 flex gap-2">
 

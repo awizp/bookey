@@ -2,6 +2,16 @@ import { createContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
+const normalizeUser = (user) => {
+    if (!user) return null;
+
+    return {
+        ...user,
+        id: user.id || user._id,
+        blockedUntil: user.blockedUntil ? new Date(user.blockedUntil).getTime() : null,
+    };
+};
+
 const AuthProvider = ({ children }) => {
 
     const [currentUser, setCurrentUser] = useState(null);
@@ -12,7 +22,7 @@ const AuthProvider = ({ children }) => {
             const storedUser = localStorage.getItem("user");
 
             if (storedUser) {
-                setCurrentUser(JSON.parse(storedUser));
+                setCurrentUser(normalizeUser(JSON.parse(storedUser)));
             }
         };
 
@@ -21,8 +31,16 @@ const AuthProvider = ({ children }) => {
 
     // login
     const login = (userData) => {
-        setCurrentUser(userData);
-        localStorage.setItem("user", JSON.stringify(userData));
+        const normalized = normalizeUser(userData);
+        setCurrentUser(normalized);
+        localStorage.setItem("user", JSON.stringify(normalized));
+    };
+
+    // update current user after profile/user changes
+    const updateCurrentUser = (userData) => {
+        const normalized = normalizeUser(userData);
+        setCurrentUser(normalized);
+        localStorage.setItem("user", JSON.stringify(normalized));
     };
 
     // logout
@@ -32,7 +50,7 @@ const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ currentUser, login, logout }}>
+        <AuthContext.Provider value={{ currentUser, setCurrentUser: updateCurrentUser, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

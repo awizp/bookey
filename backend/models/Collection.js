@@ -2,6 +2,13 @@ import mongoose from "mongoose";
 
 const collectionSchema = new mongoose.Schema(
     {
+        legacyId: {
+            type: String,
+            unique: true,
+            sparse: true,
+            trim: true,
+        },
+
         name: {
             type: String,
             required: true,
@@ -10,8 +17,8 @@ const collectionSchema = new mongoose.Schema(
 
         type: {
             type: String,
-            enum: ["normal", "liked"],
-            default: "normal",
+            enum: ["normal", "custom", "liked"],
+            default: "custom",
         },
 
         userId: {

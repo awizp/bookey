@@ -56,15 +56,23 @@ const Collections = () => {
         navigate(`/app/collections/${id}`);
     };
 
-    const handleCreate = (data) => {
-        createCollection(data, currentUser);
-        showToast("Playlist created", "success");
+    const handleCreate = async (data) => {
+        try {
+            await createCollection(data, currentUser);
+            showToast("Playlist created", "success");
+        } catch (error) {
+            showToast(error.message, "error");
+        }
     };
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
         if (window.confirm("Delete this playlist?")) {
-            deleteCollection(id);
-            showToast("Playlist deleted", "error");
+            try {
+                await deleteCollection(id);
+                showToast("Playlist deleted", "error");
+            } catch (error) {
+                showToast(error.message, "error");
+            }
         }
     };
 

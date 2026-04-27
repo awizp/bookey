@@ -23,20 +23,28 @@ const Moderation = () => {
     }, [users, search]);
 
     // moderation action
-    const moderationActions = (e, user) => {
+    const moderationActions = async (e, user) => {
         const value = e.target.value;
 
         if (!value) return;
 
         if (value === "unblock") {
             if (window.confirm("Unblock this user?")) {
-                unblockUser(user.id);
+                try {
+                    await unblockUser(user.id);
+                } catch (error) {
+                    alert(error.message);
+                }
             }
             return;
         }
 
         if (window.confirm("Apply block to this user?")) {
-            blockUser(user.id, Number(value));
+            try {
+                await blockUser(user.id, Number(value));
+            } catch (error) {
+                alert(error.message);
+            }
         }
     };
 

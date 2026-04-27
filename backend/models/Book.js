@@ -2,6 +2,13 @@ import mongoose from "mongoose";
 
 const bookSchema = new mongoose.Schema(
     {
+        legacyId: {
+            type: String,
+            unique: true,
+            sparse: true,
+            trim: true,
+        },
+
         title: {
             type: String,
             required: true,
@@ -38,6 +45,21 @@ const bookSchema = new mongoose.Schema(
         pages: {
             type: Number,
             default: 100,
+        },
+
+        language: {
+            type: String,
+            default: "",
+        },
+
+        publishedYear: {
+            type: Number,
+            default: null,
+        },
+
+        rating: {
+            type: Number,
+            default: 0,
         },
 
         createdBy: {

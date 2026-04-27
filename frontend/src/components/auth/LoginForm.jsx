@@ -1,11 +1,10 @@
 import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-import { apiRequest } from "../../api/api";
-import { AuthContext } from "../../context/AuthContext";
+import { DataContext } from "../../context/DataContext";
 
 const LoginForm = () => {
-    const { login } = useContext(AuthContext);
+    const { loginUser } = useContext(DataContext);
     const navigate = useNavigate();
 
     const [form, setForm] = useState({
@@ -17,13 +16,10 @@ const LoginForm = () => {
 
     const handleLogin = async () => {
         try {
-            const data = await apiRequest("/auth/login", "POST", {
+            await loginUser({
                 email: form.email,
                 password: form.password,
             });
-
-            // save user in context
-            login(data);
 
             navigate("/app");
 

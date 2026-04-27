@@ -10,15 +10,15 @@ import './index.css';
 import App from './App.jsx';
 
 createRoot(document.getElementById('root')).render(
-    <TrackingProvider>
+    <AuthProvider>
         <DataProvider>
-            <AuthProvider>
+            <TrackingProvider>
                 <ThemeProvider>
                     <ToastProvider>
                         <App />
                     </ToastProvider>
                 </ThemeProvider>
-            </AuthProvider>
+            </TrackingProvider>
         </DataProvider>
-    </TrackingProvider>
+    </AuthProvider>
 );

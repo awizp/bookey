@@ -46,7 +46,7 @@ const BookDetails = () => {
   };
 
   // add collection
-  const handleAddToCollection = (col) => {
+  const handleAddToCollection = async (col) => {
 
     const exists = col.books.find((b) => b.id === book.id);
 
@@ -55,45 +55,55 @@ const BookDetails = () => {
       return;
     }
 
-    addBookToCollection(col.id, book);
-    showToast("Added to playlist", "success");
-
-    setShowSelect(false);
+    try {
+      await addBookToCollection(col.id, book);
+      showToast("Added to playlist", "success");
+      setShowSelect(false);
+    } catch (error) {
+      showToast(error.message, "error");
+    }
   };
 
   // liked collection
-  const handleLike = () => {
+  const handleLike = async () => {
 
     let liked = userCollections.find(
       (c) => c.type === "liked"
     );
 
-    if (!liked) {
-      liked = createLikedCollection(currentUser.id);
-      showToast("Liked playlist created", "success");
+    try {
+      if (!liked) {
+        liked = await createLikedCollection(currentUser.id);
+        showToast("Liked playlist created", "success");
+      }
+
+      const exists = liked.books.find((b) => b.id === book.id);
+
+      if (exists) {
+        showToast("Already liked", "info");
+        return;
+      }
+
+      await addBookToCollection(liked.id, book);
+
+      showToast("Added to liked books", "success");
+    } catch (error) {
+      showToast(error.message, "error");
     }
-
-    const exists = liked.books.find((b) => b.id === book.id);
-
-    if (exists) {
-      showToast("Already liked", "info");
-      return;
-    }
-
-    addBookToCollection(liked.id, book);
-
-    showToast("Added to liked books", "success");
   };
 
   // delete book
-  const handleDelete = () => {
+  const handleDelete = async () => {
 
     if (!window.confirm("Delete this book from platform?")) return;
 
-    deleteBook(book.id, currentUser);
-    showToast("Book removed from platform", "error");
-
-    navigate("/app/library");
+    try {
+      await deleteBook(book.id, currentUser);
+      showToast("Book removed from platform", "error");
+      navigate("/app/library");
+    } catch (error) {
+      showToast(error.message, "error");
+    }
   };
 
   return (

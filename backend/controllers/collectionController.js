@@ -16,13 +16,14 @@ export const getCollections = async (req, res) => {
 // create collections
 export const createCollection = async (req, res) => {
     try {
-        const { name, type } = req.body;
+        const { legacyId, name, type, books } = req.body;
 
         const newCollection = await Collection.create({
+            legacyId,
             name,
-            type: type || "normal",
+            type: type || "custom",
             userId: req.user._id,
-            books: [],
+            books: books || [],
         });
 
         res.status(201).json(newCollection);
@@ -42,15 +43,23 @@ export const addBookToCollection = async (req, res) => {
             return res.status(404).json({ message: "Collection not found" });
         }
 
+        if (collection.userId.toString() !== req.user._id.toString()) {
+            return res.status(403).json({ message: "Not authorized" });
+        }
+
         // prevent duplicates
-        if (collection.books.includes(bookId)) {
+        const exists = collection.books.some((id) => id.toString() === bookId);
+
+        if (exists) {
             return res.status(400).json({ message: "Book already added" });
         }
 
         collection.books.push(bookId);
         await collection.save();
 
-        res.json(collection);
+        const populated = await collection.populate("books");
+
+        res.json(populated);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -67,13 +76,19 @@ export const removeBookFromCollection = async (req, res) => {
             return res.status(404).json({ message: "Collection not found" });
         }
 
+        if (collection.userId.toString() !== req.user._id.toString()) {
+            return res.status(403).json({ message: "Not authorized" });
+        }
+
         collection.books = collection.books.filter(
             (id) => id.toString() !== bookId
         );
 
         await collection.save();
 
-        res.json(collection);
+        const populated = await collection.populate("books");
+
+        res.json(populated);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

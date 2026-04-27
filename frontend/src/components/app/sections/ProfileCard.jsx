@@ -5,31 +5,22 @@ import { ToastContext } from "../../../context/ToastContext";
 
 const ProfileCard = () => {
 
-    const { currentUser, setCurrentUser } = useContext(AuthContext);
-    const { users, setUsers } = useContext(DataContext);
+    const { currentUser } = useContext(AuthContext);
+    const { updateProfile } = useContext(DataContext);
     const { showToast } = useContext(ToastContext);
 
     const [editing, setEditing] = useState(false);
     const [bio, setBio] = useState(currentUser?.bio || "");
 
     // save user auth
-    const handleSave = () => {
-
-        const updatedUser = { ...currentUser, bio };
-
-        // update users list
-        setUsers((prev) =>
-            prev.map((u) => u.id === currentUser.id ? updatedUser : u)
-        );
-
-        // update auth state (THIS FIXES UI)
-        setCurrentUser(updatedUser);
-
-        // update localStorage
-        localStorage.setItem("currentUser", JSON.stringify(updatedUser));
-
-        setEditing(false);
-        showToast("Profile updated", "success");
+    const handleSave = async () => {
+        try {
+            await updateProfile({ bio });
+            setEditing(false);
+            showToast("Profile updated", "success");
+        } catch (error) {
+            showToast(error.message, "error");
+        }
     };
 
     useEffect(() => {

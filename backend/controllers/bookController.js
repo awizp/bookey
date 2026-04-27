@@ -1,4 +1,5 @@
 import Book from "../models/Book.js";
+import mongoose from "mongoose";
 
 // get all books
 export const getBooks = async (req, res) => {
@@ -14,7 +15,11 @@ export const getBooks = async (req, res) => {
 // get single book
 export const getBookById = async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id);
+        const query = mongoose.Types.ObjectId.isValid(req.params.id)
+            ? { $or: [{ _id: req.params.id }, { legacyId: req.params.id }] }
+            : { legacyId: req.params.id };
+
+        const book = await Book.findOne(query);
 
         if (!book) {
             return res.status(404).json({ message: "Book not found" });
@@ -30,6 +35,7 @@ export const getBookById = async (req, res) => {
 export const createBook = async (req, res) => {
     try {
         const {
+            legacyId,
             title,
             author,
             image,
@@ -37,9 +43,13 @@ export const createBook = async (req, res) => {
             description,
             synopsis,
             pages,
+            language,
+            publishedYear,
+            rating,
         } = req.body;
 
         const newBook = await Book.create({
+            legacyId,
             title,
             author,
             image,
@@ -47,6 +57,9 @@ export const createBook = async (req, res) => {
             description,
             synopsis,
             pages,
+            language,
+            publishedYear,
+            rating,
             createdBy: req.user._id,
         });
 
@@ -59,7 +72,11 @@ export const createBook = async (req, res) => {
 // delete book
 export const deleteBook = async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id);
+        const query = mongoose.Types.ObjectId.isValid(req.params.id)
+            ? { $or: [{ _id: req.params.id }, { legacyId: req.params.id }] }
+            : { legacyId: req.params.id };
+
+        const book = await Book.findOne(query);
 
         if (!book) {
             return res.status(404).json({ message: "Book not found" });

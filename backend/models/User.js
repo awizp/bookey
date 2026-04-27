@@ -2,6 +2,13 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
     {
+        legacyId: {
+            type: String,
+            unique: true,
+            sparse: true,
+            trim: true,
+        },
+
         // basic info
         name: {
             type: String,
@@ -45,8 +52,8 @@ const userSchema = new mongoose.Schema(
         // reading preferences
         readerType: {
             type: String,
-            enum: ["casual", "regular", "advanced"],
-            default: "casual",
+            enum: ["beginner", "regular", "occasional", "casual", "advanced"],
+            default: "beginner",
         },
 
         likedGenres: [
@@ -64,8 +71,7 @@ const userSchema = new mongoose.Schema(
         // clubs
         clubsJoined: [
             {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Club",
+                type: String,
             },
         ],
 

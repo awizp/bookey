@@ -6,12 +6,12 @@ const ModerationPanel = () => {
 
   const { users, blockUser, unblockUser } = useContext(DataContext);
 
-  const handleBlock = (userId, duration) => {
-    blockUser(userId, duration);
+  const handleBlock = async (userId, duration) => {
+    await blockUser(userId, duration);
   };
 
-  const handleUnblock = (userId) => {
-    unblockUser(userId);
+  const handleUnblock = async (userId) => {
+    await unblockUser(userId);
   };
 
   return (

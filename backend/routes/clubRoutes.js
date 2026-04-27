@@ -7,6 +7,8 @@ import {
     joinClub,
     leaveClub,
     deleteClub,
+    addPost,
+    deletePost,
 } from "../controllers/clubController.js";
 
 import protect from "../middleware/authMiddleware.js";
@@ -28,6 +30,8 @@ router.post(
 
 router.post("/:id/join", protect, joinClub);
 router.post("/:id/leave", protect, leaveClub);
+router.post("/:id/posts", protect, addPost);
+router.delete("/:id/posts/:postId", protect, deletePost);
 
 router.delete("/:id", protect, deleteClub);
 

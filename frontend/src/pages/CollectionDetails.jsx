@@ -36,12 +36,16 @@ const CollectionDetails = () => {
         navigate(-1);
     };
 
-    const handleRemove = (bookId) => {
+    const handleRemove = async (bookId) => {
 
         if (!window.confirm("Remove this book from playlist?")) return;
 
-        removeBookFromCollection(id, bookId);
-        showToast("Removed from playlist", "info");
+        try {
+            await removeBookFromCollection(id, bookId);
+            showToast("Removed from playlist", "info");
+        } catch (error) {
+            showToast(error.message, "error");
+        }
     };
 
     return (

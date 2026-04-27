@@ -18,7 +18,7 @@ const CreateClubModal = ({ isOpen, setIsOpen, onCreate }) => {
     };
 
     return (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 px-4">
 
             <div className="bg-white dark:bg-darkCard p-5 rounded-2xl w-full max-w-md">
 

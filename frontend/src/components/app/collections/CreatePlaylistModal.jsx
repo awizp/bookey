@@ -14,19 +14,17 @@ const CreatePlaylistModal = ({ isOpen, setIsOpen, onCreate }) => {
         setName("");
     };
 
-    const handleCreate = () => {
+    const handleCreate = async () => {
 
         if (!name.trim()) {
             showToast("Playlist name is required", "error");
             return;
         }
 
-        onCreate({ name: name.trim() });
+        await onCreate({ name: name.trim() });
 
         setName("");
         setIsOpen(false);
-
-        showToast("Playlist created", "success");
     };
 
     if (!isOpen) return null;

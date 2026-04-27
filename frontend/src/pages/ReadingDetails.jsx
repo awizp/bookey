@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaCheck, FaTimes } from "react-icons/fa";
 
 import Sidebar from "../components/app/layout/Sidebar";
 import AppNavbar from "../components/app/layout/AppNavbar";
@@ -57,7 +57,7 @@ const ReadingDetails = () => {
     );
 
     // update progress
-    const handleUpdate = () => {
+    const handleUpdate = async () => {
 
         const value = Number(pages);
 
@@ -66,23 +66,35 @@ const ReadingDetails = () => {
             return;
         }
 
-        updateProgress(id, value, currentUser);
-        setPages("");
-        showToast("Progress updated", "success");
+        try {
+            await updateProgress(id, value, currentUser);
+            setPages("");
+            showToast("Progress updated", "success");
+        } catch (error) {
+            showToast(error.message, "error");
+        }
     };
 
     // complete book
-    const handleComplete = () => {
-        markCompleted(id, currentUser);
-        showToast("Marked as completed", "success");
-        navigate("/app");
+    const handleComplete = async () => {
+        try {
+            await markCompleted(id, currentUser);
+            showToast("Marked as completed", "success");
+            navigate("/app");
+        } catch (error) {
+            showToast(error.message, "error");
+        }
     };
 
     // drop book
-    const handleDrop = () => {
-        markDropped(id, currentUser);
-        showToast("Marked as dropped", "info");
-        navigate("/app");
+    const handleDrop = async () => {
+        try {
+            await markDropped(id, currentUser);
+            showToast("Marked as dropped", "info");
+            navigate("/app");
+        } catch (error) {
+            showToast(error.message, "error");
+        }
     };
 
     return (
@@ -99,7 +111,7 @@ const ReadingDetails = () => {
                     {/* back */}
                     <button
                         onClick={() => navigate(-1)}
-                        className="flex items-center gap-2 text-sm text-primary font-semibold"
+                        className="flex items-center gap-2 text-sm text-primary font-semibold cursor-pointer"
                     >
                         <FaArrowLeft />
                         Back
@@ -161,19 +173,19 @@ const ReadingDetails = () => {
                                 </div>
 
                                 {/* update */}
-                                <div className="flex gap-2">
+                                <div className="flex gap-2 items-center">
 
                                     <input
-                                        type="number"
+                                        type="text"
                                         value={pages}
                                         onChange={(e) => setPages(e.target.value)}
                                         placeholder="Update pages..."
-                                        className="flex-1 p-2 rounded-lg bg-gray-100 dark:bg-gray-800 outline-none text-sm"
+                                        className="flex-1 p-2 rounded-lg bg-gray-100 dark:bg-gray-800 outline-none text-sm focus:ring-2 focus:ring-primary"
                                     />
 
                                     <button
                                         onClick={handleUpdate}
-                                        className="px-4 py-2 bg-primary text-white rounded-lg text-sm"
+                                        className="px-5 py-2 bg-primary text-white rounded-lg text-sm font-medium cursor-pointer hover:opacity-90 transition"
                                     >
                                         Update
                                     </button>
@@ -181,20 +193,24 @@ const ReadingDetails = () => {
                                 </div>
 
                                 {/* actions */}
-                                <div className="flex gap-3 flex-wrap">
+                                <div className="flex gap-3 items-center">
 
+                                    {/* complete */}
                                     <button
                                         onClick={handleComplete}
-                                        className="px-4 py-2 bg-green-500 text-white rounded-lg text-sm"
+                                        title="Mark as Completed"
+                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-green-500 cursor-pointer hover:bg-green-500/10 transition"
                                     >
-                                        Mark Completed
+                                        <FaCheck />
                                     </button>
 
+                                    {/* drop */}
                                     <button
                                         onClick={handleDrop}
-                                        className="px-4 py-2 bg-red-500 text-white rounded-lg text-sm"
+                                        title="Drop Book"
+                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-red-500 cursor-pointer hover:bg-red-500/10 transition"
                                     >
-                                        Drop Book
+                                        <FaTimes />
                                     </button>
 
                                 </div>

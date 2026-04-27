@@ -54,18 +54,26 @@ const TrackingPlaylist = () => {
     };
 
     // user functions
-    const handleRead = (book) => {
+    const handleRead = async (book) => {
         if (!book) return;
 
-        moveToReading(book, currentUser);
-        showToast("Moved to currently reading", "success");
+        try {
+            await moveToReading(book, currentUser);
+            showToast("Moved to currently reading", "success");
+        } catch (error) {
+            showToast(error.message, "error");
+        }
     };
 
-    const handleRemove = (e, bookId) => {
+    const handleRemove = async (e, bookId) => {
         e.stopPropagation();
 
-        removeFromList(type, bookId, currentUser);
-        showToast("Removed from list", "info");
+        try {
+            await removeFromList(type, bookId, currentUser);
+            showToast("Removed from list", "info");
+        } catch (error) {
+            showToast(error.message, "error");
+        }
     };
 
     const handleOpen = (bookId) => {

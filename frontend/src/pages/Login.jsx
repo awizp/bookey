@@ -4,7 +4,7 @@ import { Navbar, Footer } from "../components/landing";
 const Login = () => {
     return (
         <>
-            <title>Login with your credentials | Bookey</title>
+            <title>Login | Bookey</title>
 
             <Navbar />
 

@@ -13,6 +13,7 @@ import AdminDashboard from "../components/app/dashboard/AdminDashboard";
 
 import { DataContext } from "../context/DataContext";
 import { AuthContext } from "../context/AuthContext";
+import { ToastContext } from "../context/ToastContext";
 
 const AppLayout = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +21,7 @@ const AppLayout = () => {
 
     const { books, addBook } = useContext(DataContext);
     const { currentUser } = useContext(AuthContext);
+    const { showToast } = useContext(ToastContext);
 
     // random clubs data
     const clubs = [
@@ -42,6 +44,15 @@ const AppLayout = () => {
             members: 200
         },
     ];
+
+    const handleAddBook = async (bookData) => {
+        try {
+            await addBook(bookData);
+            showToast("Book added", "success");
+        } catch (error) {
+            showToast(error.message, "error");
+        }
+    };
 
     return (
         <div className="h-screen flex overflow-hidden">
@@ -76,7 +87,7 @@ const AppLayout = () => {
             <AddBookModal
                 isOpen={openModal}
                 setIsOpen={setOpenModal}
-                onSubmit={addBook}
+                onSubmit={handleAddBook}
             />
 
         </div>

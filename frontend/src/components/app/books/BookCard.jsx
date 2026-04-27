@@ -15,7 +15,7 @@ const BookCard = ({ book }) => {
   const {
     collections,
     addBookToCollection,
-    createCollection,
+    createLikedCollection,
     deleteBook,
   } = useContext(DataContext);
 
@@ -31,13 +31,17 @@ const BookCard = ({ book }) => {
 
   const canDelete = ["admin", "moderator"].includes(currentUser.role);
 
-  const handleDelete = (e) => {
+  const handleDelete = async (e) => {
     e.stopPropagation();
 
     if (!window.confirm("Delete this book from platform?")) return;
 
-    deleteBook(book.id, currentUser);
-    showToast("Book removed from platform", "error");
+    try {
+      await deleteBook(book.id, currentUser);
+      showToast("Book removed from platform", "error");
+    } catch (error) {
+      showToast(error.message, "error");
+    }
   };
 
   const handleNavigate = () => {
@@ -49,37 +53,34 @@ const BookCard = ({ book }) => {
     setShowSelect((prev) => !prev);
   };
 
-  const handleLike = (e) => {
+  const handleLike = async (e) => {
     e.stopPropagation();
 
     let liked = userCollections.find(
       (c) => c.type === "liked"
     );
 
-    if (!liked) {
-      const newLiked = {
-        name: "Liked Books",
-        type: "liked",
-      };
+    try {
+      if (!liked) {
+        liked = await createLikedCollection(currentUser.id);
+        showToast("Liked playlist created", "success");
+      }
 
-      createCollection(newLiked, currentUser);
+      const exists = liked.books.find((b) => b.id === book.id);
 
-      showToast("Liked playlist created", "success");
-      return;
+      if (exists) {
+        showToast("Already liked", "info");
+        return;
+      }
+
+      await addBookToCollection(liked.id, book);
+      showToast("Added to liked books", "success");
+    } catch (error) {
+      showToast(error.message, "error");
     }
-
-    const exists = liked.books.find((b) => b.id === book.id);
-
-    if (exists) {
-      showToast("Already liked", "info");
-      return;
-    }
-
-    addBookToCollection(liked.id, book);
-    showToast("Added to liked books", "success");
   };
 
-  const handleAddToCollection = (col, e) => {
+  const handleAddToCollection = async (col, e) => {
     e.stopPropagation();
 
     const exists = col.books.find((b) => b.id === book.id);
@@ -89,10 +90,13 @@ const BookCard = ({ book }) => {
       return;
     }
 
-    addBookToCollection(col.id, book);
-    showToast("Added to playlist", "success");
-
-    setShowSelect(false);
+    try {
+      await addBookToCollection(col.id, book);
+      showToast("Added to playlist", "success");
+      setShowSelect(false);
+    } catch (error) {
+      showToast(error.message, "error");
+    }
   };
 
   return (

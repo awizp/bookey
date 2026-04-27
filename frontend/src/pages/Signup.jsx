@@ -2,12 +2,14 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { DataContext } from "../context/DataContext";
+import { AuthContext } from "../context/AuthContext";
 
 import { ReaderType, GenreTypes, LikedBooks, AccountDetails } from "../components/auth";
 import { Navbar, Footer } from "../components/landing";
 
 const Signup = () => {
-    const { books, users, registerUser, collections, setCollections } = useContext(DataContext);
+    const { books, registerUser } = useContext(DataContext);
+    const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const [step, setStep] = useState(1);
@@ -24,43 +26,25 @@ const Signup = () => {
     });
 
     // user submit
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
 
         if (form.password !== form.confirmPassword) {
             alert("Passwords do not match");
             return;
         }
 
-        // check existing user
-        const exists = users.find((u) => u.email === form.email);
-
-        if (exists) {
-            alert("User already exists. Please login.");
-            navigate("/login");
-            return;
+        try {
+            const newUser = await registerUser(form);
+            login(newUser);
+            navigate("/app");
+        } catch (error) {
+            alert(error.message);
         }
-
-        // create user
-        const newUser = registerUser(form);
-
-        // create liked collection for user
-        const likedCollection = {
-            id: "liked_" + newUser.id,
-            name: "Liked Books",
-            userId: newUser.id,
-            type: "liked",
-            books: [],
-        };
-
-        setCollections((prev) => [...prev, likedCollection]);
-
-        // redirect
-        navigate("/login");
     };
 
     return (
         <>
-            <title>Sign up with your credentials | Bookey</title>
+            <title>Sign up | Bookey</title>
 
             <Navbar />
 

@@ -42,16 +42,20 @@ const AddReadingModal = ({ isOpen, setIsOpen }) => {
         });
     }
 
-    const handleAdd = (book) => {
+    const handleAdd = async (book) => {
 
         if (readingIds.includes(book.id)) {
             showToast("Already in reading list", "info");
             return;
         }
 
-        addToReading(book, currentUser);
-        showToast("Added to reading", "success");
-        setIsOpen(false);
+        try {
+            await addToReading(book, currentUser);
+            showToast("Added to reading", "success");
+            setIsOpen(false);
+        } catch (error) {
+            showToast(error.message, "error");
+        }
     };
 
     return (

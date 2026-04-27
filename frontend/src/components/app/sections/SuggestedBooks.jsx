@@ -11,12 +11,39 @@ const SuggestedBooks = () => {
 
     const navigate = useNavigate();
 
-    const suggested = books
+    const likedGenres = (currentUser?.likedGenres || [])
+        .map((genre) => genre.toLowerCase().trim())
+        .filter(Boolean);
+
+    const selectedBooks = currentUser?.selectedBooks || [];
+
+    const selectedBookGenres = books
         .filter((book) =>
-            currentUser?.likedGenres?.some((g) =>
-                book.genre.includes(g)
-            )
+            selectedBooks.includes(book.id) || selectedBooks.includes(book.legacyId)
         )
+        .flatMap((book) => book.genre || [])
+        .map((genre) => genre.toLowerCase().trim());
+
+    const genreScores = [...likedGenres, ...selectedBookGenres].reduce(
+        (scores, genre, index) => ({
+            ...scores,
+            [genre]: (scores[genre] || 0) + Math.max(1, likedGenres.length + selectedBookGenres.length - index),
+        }),
+        {}
+    );
+
+    const suggested = books
+        .map((book) => {
+            const genres = (book.genre || []).map((genre) => genre.toLowerCase().trim());
+            const score = genres.reduce(
+                (total, genre) => total + (genreScores[genre] || 0),
+                0
+            );
+
+            return { ...book, suggestionScore: score };
+        })
+        .filter((book) => book.suggestionScore > 0)
+        .sort((a, b) => b.suggestionScore - a.suggestionScore || a.title.localeCompare(b.title))
         .slice(0, 4);
 
     if (!suggested.length) return null;

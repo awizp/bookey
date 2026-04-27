@@ -9,7 +9,7 @@ import { DataContext } from "../context/DataContext";
 
 const Users = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { users, setUsers } = useContext(DataContext);
+    const { users, updateUserRole, deleteUser: removeUser } = useContext(DataContext);
 
     const [search, setSearch] = useState("");
 
@@ -21,26 +21,20 @@ const Users = () => {
     }, [users, search]);
 
     // role change by toggle
-    const toggleRole = (id) => {
-        const updated = users.map((u) => {
-            if (u.id !== id) return u;
+    const toggleRole = async (id) => {
+        const user = users.find((u) => u.id === id);
 
-            // admin role doesn't need to change
-            if (u.role === "admin") return u;
+        if (!user || user.role === "admin") return;
 
-            return {
-                ...u,
-                role: u.role === "moderator" ? "user" : "moderator",
-            };
-        });
+        const nextRole = user.role === "moderator" ? "user" : "moderator";
 
-        setUsers(updated);
+        await updateUserRole(id, nextRole);
     };
 
     // delete the user
-    const deleteUser = (id) => {
+    const deleteUser = async (id) => {
         if (window.confirm("Delete this user?")) {
-            setUsers(users.filter((u) => u.id !== id));
+            await removeUser(id);
         }
     };
 
