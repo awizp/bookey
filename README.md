@@ -1,4 +1,4 @@
-# Bookey — centralized platform to organize and manage your reading journey
+## Bookey | centralized platform to organize and manage your reading journey
 
 <p align="center">
   <img src="./assets/logo.png" alt="Bookey Logo" width="120" />
@@ -8,13 +8,11 @@
   A modern full-stack reading platform where users can track books, join clubs, share posts & quotes, and engage with a reading community.
 </p>
 
----
 
 ## Live Demo
 
 - Application live: https://bookey-app.vercel.app  
 
----
 
 ## Application Preview
 
@@ -22,7 +20,6 @@
   <img src="./assets/app-preview.png" alt="Bookey UI" width="800" />
 </p>
 
----
 
 ## Tech Stack
 
@@ -41,7 +38,6 @@
 - Vercel for Frontend
 - Render for Backend
 
----
 
 ## Features
 
@@ -75,7 +71,6 @@
 - Responsive across devices
 - Focused interaction flow
 
----
 
 ## Installation & Setup
 
