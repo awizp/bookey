@@ -85,18 +85,23 @@
 git clone https://github.com/awizp/bookey.git
 cd bookey
 cd backend
-npm install```
+npm install
+```
 
 ### 2. Create .env file
 
-```PORT=
+```bash
+PORT=
 MONGO_URI=
 JWT_SECRET=
-BASE_UI= ```
+BASE_UI= 
+```
 
 ### 3. Run Backend
 
-``` npm run dev ```
+```bash 
+npm run dev 
+```
 
 ## Author
 
