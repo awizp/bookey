@@ -82,7 +82,7 @@ const BookDiscussions = () => {
                     </button>
 
                     <h1 className="font-semibold">
-                        {book ? `<span className="text-primary">${book.title}</span> Discussions` : "Discussions"}
+                        {book ? <span className="text-primary capitalize">`${book.title} Discussions`</span> : "Discussions"}
                     </h1>
 
                     {/* posts */}
