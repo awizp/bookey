@@ -81,8 +81,8 @@ const BookDiscussions = () => {
                         <FaArrowLeft /> Back
                     </button>
 
-                    <h1 className="font-semibold">
-                        {book ? <span className="text-primary capitalize">`${book.title} Discussions`</span> : "Discussions"}
+                    <h1 className="font-bold lg:font-semibold lg:text-lg">
+                        {book ? <span className="text-primary capitalize">{book.title} Discussions</span> : "Discussions"}
                     </h1>
 
                     {/* posts */}
