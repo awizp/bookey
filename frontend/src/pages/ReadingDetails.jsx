@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { FaArrowLeft, FaCheck, FaTimes } from "react-icons/fa";
+import { FaArrowLeft, FaCheck, FaTimes, FaPen } from "react-icons/fa";
 
 import Sidebar from "../components/app/layout/Sidebar";
 import AppNavbar from "../components/app/layout/AppNavbar";
@@ -17,21 +17,16 @@ const ReadingDetails = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [pages, setPages] = useState("");
+    const [showPostInput, setShowPostInput] = useState(false);
+    const [postContent, setPostContent] = useState("");
 
     const { currentUser } = useContext(AuthContext);
-    const { books } = useContext(DataContext);
-    const {
-        trackingData,
-        updateProgress,
-        markCompleted,
-        markDropped
-    } = useContext(TrackingContext);
+    const { books, createBookPost } = useContext(DataContext);
+    const { trackingData, updateProgress, markCompleted, markDropped } = useContext(TrackingContext);
     const { showToast } = useContext(ToastContext);
 
-    // get book
     const book = books.find((b) => b.id === id);
 
-    // get tracking
     const userTracking = trackingData.find(
         (t) => t.userId === currentUser.id
     );
@@ -40,14 +35,8 @@ const ReadingDetails = () => {
         (b) => b.bookId === id
     );
 
-    // fallback
-    if (!book) {
-        return <p className="p-6">Book not found</p>;
-    }
-
-    if (!trackingItem) {
-        return <p className="p-6">This book is not in currently reading</p>;
-    }
+    if (!book) return <p className="p-6">Book not found</p>;
+    if (!trackingItem) return <p className="p-6">Not in reading list</p>;
 
     const totalPages = trackingItem.totalPages || book.pages || 100;
 
@@ -56,9 +45,7 @@ const ReadingDetails = () => {
         100
     );
 
-    // update progress
     const handleUpdate = async () => {
-
         const value = Number(pages);
 
         if (!value || value < 0 || value > totalPages) {
@@ -75,23 +62,26 @@ const ReadingDetails = () => {
         }
     };
 
-    // complete book
     const handleComplete = async () => {
-        try {
-            await markCompleted(id, currentUser);
-            showToast("Marked as completed", "success");
-            navigate("/app");
-        } catch (error) {
-            showToast(error.message, "error");
-        }
+        await markCompleted(id, currentUser);
+        navigate("/app");
     };
 
-    // drop book
     const handleDrop = async () => {
+        await markDropped(id, currentUser);
+        navigate("/app");
+    };
+
+    const handleCreatePost = async () => {
+        if (!postContent.trim()) {
+            return showToast("Write something", "error");
+        }
+
         try {
-            await markDropped(id, currentUser);
-            showToast("Marked as dropped", "info");
-            navigate("/app");
+            await createBookPost(id, postContent);
+            setPostContent("");
+            setShowPostInput(false);
+            showToast("Posted successfully", "success");
         } catch (error) {
             showToast(error.message, "error");
         }
@@ -108,71 +98,48 @@ const ReadingDetails = () => {
 
                 <div className="flex-1 overflow-y-auto bg-bgLight dark:bg-darkBg p-4 space-y-6">
 
-                    {/* back */}
                     <button
                         onClick={() => navigate(-1)}
-                        className="flex items-center gap-2 text-sm text-primary font-semibold cursor-pointer"
+                        className="flex items-center gap-2 text-sm text-primary cursor-pointer"
                     >
-                        <FaArrowLeft />
-                        Back
+                        <FaArrowLeft /> Back
                     </button>
 
-                    {/* container */}
                     <div className="bg-white dark:bg-darkCard rounded-2xl p-5 space-y-6">
 
-                        <div className="flex flex-col md:flex-row gap-8">
+                        <div className="flex flex-col md:flex-row gap-6">
 
-                            {/* image */}
-                            <div className="w-full md:w-60 rounded-xl overflow-hidden border-2 border-primary">
-                                <img
-                                    src={book.image}
-                                    alt={book.title}
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
+                            <img
+                                src={book.image}
+                                alt={book.title}
+                                className="w-40 h-56 object-cover rounded-xl"
+                            />
 
-                            {/* details */}
-                            <div className="flex-1 space-y-4">
+                            <div className="flex-1 space-y-4 p-2">
 
                                 <div>
                                     <h1 className="text-xl font-semibold">
                                         {book.title}
                                     </h1>
-
                                     <p className="text-sm text-gray-500">
-                                        by {book.author}
+                                        {book.author}
                                     </p>
                                 </div>
 
-                                {/* genres */}
-                                <div className="flex flex-wrap gap-2">
-                                    {book.genre.map((g, i) => (
-                                        <span
-                                            key={i}
-                                            className="text-xs px-3 py-1 bg-primary/10 text-primary rounded-full"
-                                        >
-                                            {g}
-                                        </span>
-                                    ))}
-                                </div>
-
-                                {/* progress */}
                                 <div className="space-y-2">
-
                                     <p className="text-sm text-gray-600">
                                         {trackingItem.pagesRead} / {totalPages} pages
                                     </p>
 
-                                    <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                                    <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
                                         <div
                                             className="h-full bg-primary"
                                             style={{ width: `${progress}%` }}
                                         />
                                     </div>
-
                                 </div>
 
-                                {/* update */}
+                                {/* update section */}
                                 <div className="flex gap-2 items-center">
 
                                     <input
@@ -180,48 +147,89 @@ const ReadingDetails = () => {
                                         value={pages}
                                         onChange={(e) => setPages(e.target.value)}
                                         placeholder="Update pages..."
-                                        className="flex-1 p-2 rounded-lg bg-gray-100 dark:bg-gray-800 outline-none text-sm focus:ring-2 focus:ring-primary"
+                                        className="flex-1 p-2 rounded-lg bg-gray-100 dark:bg-gray-800 outline-none text-sm"
                                     />
 
                                     <button
                                         onClick={handleUpdate}
-                                        className="px-5 py-2 bg-primary text-white rounded-lg text-sm font-medium cursor-pointer hover:opacity-90 transition"
+                                        className="px-4 py-2 bg-primary text-white rounded-lg text-sm cursor-pointer"
                                     >
                                         Update
                                     </button>
 
-                                </div>
+                                    {/* post icon */}
+                                    <button
+                                        onClick={() => setShowPostInput((prev) => !prev)}
+                                        title="Thoughts about this book?"
+                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-blue-500 cursor-pointer"
+                                    >
+                                        <FaPen />
+                                    </button>
 
-                                {/* actions */}
-                                <div className="flex gap-3 items-center">
-
-                                    {/* complete */}
                                     <button
                                         onClick={handleComplete}
-                                        title="Mark as Completed"
-                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-green-500 cursor-pointer hover:bg-green-500/10 transition"
+                                        title="Completed"
+                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-green-500 cursor-pointer"
                                     >
                                         <FaCheck />
                                     </button>
 
-                                    {/* drop */}
                                     <button
                                         onClick={handleDrop}
-                                        title="Drop Book"
-                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-red-500 cursor-pointer hover:bg-red-500/10 transition"
+                                        title="Drop"
+                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-red-500 cursor-pointer"
                                     >
                                         <FaTimes />
                                     </button>
 
                                 </div>
 
+                                {/* post input */}
+                                {showPostInput && (
+                                    <div className="space-y-2">
+
+                                        <textarea
+                                            value={postContent}
+                                            onChange={(e) => setPostContent(e.target.value)}
+                                            placeholder="Write your thoughts..."
+                                            className="w-full p-3 rounded-xl bg-gray-100 dark:bg-gray-800 outline-none text-sm"
+                                        />
+
+                                        <div className="flex justify-end gap-2">
+
+                                            <button
+                                                onClick={() => setShowPostInput(false)}
+                                                className="px-3 py-1 text-sm bg-gray-200 rounded-lg cursor-pointer"
+                                            >
+                                                Cancel
+                                            </button>
+
+                                            <button
+                                                onClick={handleCreatePost}
+                                                className="px-4 py-1 text-sm bg-primary text-white rounded-lg cursor-pointer"
+                                            >
+                                                Post
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+                                )}
+
+                                {/* discussions navigation */}
+                                <button
+                                    onClick={() => navigate(`/app/book/${id}/discussions`)}
+                                    className="w-fit mt-2 px-3 py-2 bg-primary text-white rounded-xl text-sm cursor-pointer"
+                                >
+                                    View Discussions
+                                </button>
+
                             </div>
 
                         </div>
 
-                        {/* synopsis */}
-                        <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                            {book.synopsis || "No description available."}
+                        <p className="text-sm text-gray-600">
+                            {book.synopsis || "No description available"}
                         </p>
 
                     </div>

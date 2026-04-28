@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { Landing, Signup, Login, AppLayout, BookDetails, Library, Collections, Clubs, CollectionDetails, ClubDetails, Moderation, Users, ReadingDetails, ReadingPlaylist, TrackingPlaylist } from "./pages";
+import { Landing, Signup, Login, AppLayout, BookDetails, Library, Collections, Clubs, CollectionDetails, ClubDetails, Moderation, Users, ReadingDetails, ReadingPlaylist, TrackingPlaylist, BookDiscussions } from "./pages";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
@@ -89,6 +89,14 @@ function App() {
           element={
             <ProtectedRoute>
               <TrackingPlaylist />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/app/book/:id/discussions"
+          element={
+            <ProtectedRoute>
+              <BookDiscussions />
             </ProtectedRoute>
           }
         />

@@ -414,6 +414,34 @@ const DataProvider = ({ children }) => {
         }
     };
 
+    const getBookPosts = async (bookId) => {
+        try {
+            const data = await apiRequest(`/book-posts/${bookId}`);
+            return data;
+        } catch (err) {
+            return handleError(err);
+        }
+    };
+
+    const createBookPost = async (bookId, content) => {
+        try {
+            const created = await apiRequest(`/book-posts/${bookId}`, "POST", {
+                content,
+            });
+            return created;
+        } catch (err) {
+            return handleError(err);
+        }
+    };
+
+    const deleteBookPost = async (bookId, postId) => {
+        try {
+            await apiRequest(`/book-posts/${bookId}/${postId}`, "DELETE");
+        } catch (err) {
+            return handleError(err);
+        }
+    };
+
     const valueProvider = {
         books,
         users,
@@ -432,6 +460,10 @@ const DataProvider = ({ children }) => {
         deleteCollection,
         addBookToCollection,
         removeBookFromCollection,
+
+        getBookPosts,
+        createBookPost,
+        deleteBookPost,
 
         clubs,
         setClubs,

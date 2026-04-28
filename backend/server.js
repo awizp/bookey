@@ -10,6 +10,7 @@ import clubRoutes from "./routes/clubRoutes.js";
 import bookRoutes from "./routes/bookRoutes.js";
 import collectionRoutes from "./routes/collectionRoutes.js";
 import trackingRoutes from "./routes/trackingRoutes.js";
+import bookPostRoutes from "./routes/bookPostRoutes.js";
 
 // mongodb server is slow so using cloudflare dns
 import dns from "node:dns/promises";
@@ -45,6 +46,7 @@ app.use("/api/books", bookRoutes);
 app.use("/api/collections", collectionRoutes);
 app.use("/api/clubs", clubRoutes);
 app.use("/api/tracking", trackingRoutes);
+app.use("/api/book-posts", bookPostRoutes);
 
 // server
 const PORT = process.env.PORT || 5000;

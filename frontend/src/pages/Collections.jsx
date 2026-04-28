@@ -100,12 +100,12 @@ const Collections = () => {
                         </h1>
 
                         <p className="text-sm text-gray-600 font-semibold">
-                            Manage your personal playlists
+                            Manage your personal collections
                         </p>
 
                         <input
                             type="text"
-                            placeholder="Search playlists..."
+                            placeholder="Search collections..."
                             value={search}
                             onChange={handleSearch}
                             className="w-full sm:w-80 p-3 rounded-xl bg-white dark:bg-darkCard outline-none"
@@ -160,12 +160,12 @@ const Collections = () => {
                     {/* playlists */}
                     <div>
                         <h2 className="font-semibold mb-3">
-                            Your Playlists
+                            Your collections
                         </h2>
 
                         {filteredCollections.length === 0 ? (
                             <p className="text-sm text-gray-600">
-                                No playlists found
+                                No collections found
                             </p>
                         ) : (
                             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">

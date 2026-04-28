@@ -13,5 +13,6 @@ import Users from "./Users";
 import ReadingDetails from "./ReadingDetails";
 import ReadingPlaylist from "./ReadingPlaylist";
 import TrackingPlaylist from "./TrackingPlaylist";
+import BookDiscussions from "./BookDiscussions";
 
-export { Landing, Signup, Login, AppLayout, BookDetails, Library, Collections, CollectionDetails, Clubs, ClubDetails, Moderation, Users, ReadingDetails, ReadingPlaylist, TrackingPlaylist };
+export { Landing, Signup, Login, AppLayout, BookDetails, Library, Collections, CollectionDetails, Clubs, ClubDetails, Moderation, Users, ReadingDetails, ReadingPlaylist, TrackingPlaylist, BookDiscussions };
