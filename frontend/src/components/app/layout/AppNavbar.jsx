@@ -39,8 +39,8 @@ const AppNavbar = ({ setIsOpen }) => {
                     <FaBars />
                 </button>
 
-                <h2 className="font-semibold text-lg">
-                    {currentUser?.name?.charAt(0).toUpperCase() + currentUser?.name?.slice(1)}
+                <h2 className="font-semibold text-xs xs:text-sm lg:text-lg">
+                    Hello {currentUser?.name?.charAt(0).toUpperCase() + currentUser?.name?.slice(1)}
                 </h2>
             </div>
 
