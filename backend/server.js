@@ -38,6 +38,11 @@ app.get("/", (req, res) => {
     res.send("Hello from bookey server");
 });
 
+// activity uptime robot public link for warm server every 5 minutes
+app.get("/activity", (req, res) => {
+    res.status(200).json({ status: "active" });
+});
+
 // routes
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
