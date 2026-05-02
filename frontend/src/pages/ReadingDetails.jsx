@@ -140,47 +140,54 @@ const ReadingDetails = () => {
                                 </div>
 
                                 {/* update section */}
-                                <div className="flex gap-2 items-center">
+                                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
 
-                                    <input
-                                        type="text"
-                                        value={pages}
-                                        onChange={(e) => setPages(e.target.value)}
-                                        placeholder="Update pages..."
-                                        className="flex-1 p-2 rounded-lg bg-gray-100 dark:bg-gray-800 outline-none text-sm"
-                                    />
+                                    {/* input + update */}
+                                    <div className="flex flex-1 gap-2">
+                                        <input
+                                            type="text"
+                                            value={pages}
+                                            onChange={(e) => setPages(e.target.value)}
+                                            placeholder="Update pages..."
+                                            className="flex-1 p-2 rounded-lg bg-gray-100 dark:bg-gray-800 outline-none text-sm"
+                                        />
 
-                                    <button
-                                        onClick={handleUpdate}
-                                        className="px-4 py-2 bg-primary text-white rounded-lg text-sm cursor-pointer"
-                                    >
-                                        Update
-                                    </button>
+                                        <button
+                                            onClick={handleUpdate}
+                                            className="px-4 py-2 bg-primary text-white rounded-lg text-sm cursor-pointer whitespace-nowrap"
+                                        >
+                                            Update
+                                        </button>
+                                    </div>
 
-                                    {/* post icon */}
-                                    <button
-                                        onClick={() => setShowPostInput((prev) => !prev)}
-                                        title="Thoughts about this book?"
-                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-blue-500 cursor-pointer"
-                                    >
-                                        <FaPen />
-                                    </button>
+                                    {/* secondary buttons */}
+                                    <div className="flex gap-2 justify-start sm:justify-end">
 
-                                    <button
-                                        onClick={handleComplete}
-                                        title="Completed"
-                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-green-500 cursor-pointer"
-                                    >
-                                        <FaCheck />
-                                    </button>
+                                        <button
+                                            onClick={() => setShowPostInput((prev) => !prev)}
+                                            title="Thoughts about this book?"
+                                            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-blue-500 cursor-pointer"
+                                        >
+                                            <FaPen />
+                                        </button>
 
-                                    <button
-                                        onClick={handleDrop}
-                                        title="Drop"
-                                        className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-red-500 cursor-pointer"
-                                    >
-                                        <FaTimes />
-                                    </button>
+                                        <button
+                                            onClick={handleComplete}
+                                            title="Completed"
+                                            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-green-500 cursor-pointer"
+                                        >
+                                            <FaCheck />
+                                        </button>
+
+                                        <button
+                                            onClick={handleDrop}
+                                            title="Drop"
+                                            className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-red-500 cursor-pointer"
+                                        >
+                                            <FaTimes />
+                                        </button>
+
+                                    </div>
 
                                 </div>
 
@@ -219,7 +226,7 @@ const ReadingDetails = () => {
                                 {/* discussions navigation */}
                                 <button
                                     onClick={() => navigate(`/app/book/${id}/discussions`)}
-                                    className="w-fit mt-2 px-3 py-2 bg-primary text-white rounded-xl text-sm cursor-pointer"
+                                    className="w-full sm:w-fit mt-2 px-3 py-2 bg-primary text-white rounded-xl text-sm cursor-pointer"
                                 >
                                     View Discussions
                                 </button>

@@ -131,7 +131,7 @@ const BookDetails = () => {
           {/* container */}
           <div className="bg-white dark:bg-darkCard rounded-2xl p-4 md:p-6">
 
-            <div className="flex flex-col md:flex-row items-start gap-16">
+            <div className="flex flex-col md:flex-row items-start gap-6 md:gap-16">
 
               <div className="w-fit">
                 <div className="w-fit h-full overflow-hidden rounded-xl">
@@ -170,11 +170,11 @@ const BookDetails = () => {
                 </p>
 
                 {/* Add book */}
-                <div className="flex gap-3 mt-6 flex-col xs:flex-row">
+                <div className="flex flex-col sm:flex-row gap-3 mt-6">
 
                   <button
                     onClick={handleToggleSelect}
-                    className="flex items-center gap-2 justify-center bg-primary text-white px-4 py-2 rounded-xl cursor-pointer"
+                    className="w-full sm:w-auto flex items-center gap-2 justify-center bg-primary text-white px-4 py-2 rounded-xl cursor-pointer"
                   >
                     <FaPlus />
                     Add to Playlist
@@ -182,7 +182,7 @@ const BookDetails = () => {
 
                   <button
                     onClick={handleLike}
-                    className="flex items-center gap-2 justify-center bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-xl cursor-pointer"
+                    className="w-full sm:w-auto flex items-center gap-2 justify-center bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-xl cursor-pointer"
                   >
                     <FaHeart />
                     Like
@@ -191,7 +191,7 @@ const BookDetails = () => {
                   {canDelete && (
                     <button
                       onClick={handleDelete}
-                      className="flex items-center gap-2 justify-center bg-red-500 text-white px-4 py-2 rounded-xl cursor-pointer"
+                      className="w-full sm:w-auto flex items-center gap-2 justify-center bg-red-500 text-white px-4 py-2 rounded-xl cursor-pointer"
                     >
                       <FaTrash />
                       Delete Book
