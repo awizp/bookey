@@ -15,18 +15,21 @@ const normalizeUser = (user) => {
 const AuthProvider = ({ children }) => {
 
     const [currentUser, setCurrentUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     // load user from localStorage
     useEffect(() => {
-        const getStoredUser = () => {
+        const getUsers = () => {
             const storedUser = localStorage.getItem("user");
 
             if (storedUser) {
                 setCurrentUser(normalizeUser(JSON.parse(storedUser)));
             }
+
+            setLoading(false);
         };
 
-        getStoredUser();
+        getUsers();
     }, []);
 
     // login
@@ -36,7 +39,7 @@ const AuthProvider = ({ children }) => {
         localStorage.setItem("user", JSON.stringify(normalized));
     };
 
-    // update current user after profile/user changes
+    // update current user after profile or user changes
     const updateCurrentUser = (userData) => {
         const normalized = normalizeUser(userData);
         setCurrentUser(normalized);
@@ -50,8 +53,16 @@ const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ currentUser, setCurrentUser: updateCurrentUser, login, logout }}>
-            {children}
+        <AuthContext.Provider
+            value={{
+                currentUser,
+                setCurrentUser: updateCurrentUser,
+                login,
+                logout,
+                loading,
+            }}
+        >
+            {!loading && children}
         </AuthContext.Provider>
     );
 };

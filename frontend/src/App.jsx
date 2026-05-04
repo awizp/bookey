@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Landing, Signup, Login, AppLayout, BookDetails, Library, Collections, Clubs, CollectionDetails, ClubDetails, Moderation, Users, ReadingDetails, ReadingPlaylist, TrackingPlaylist, BookDiscussions } from "./pages";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import PublicRoute from "./routes/PublicRoute";
 
 function App() {
   return (
@@ -10,8 +11,16 @@ function App() {
 
         {/* public route */}
         <Route path="/" element={<Landing />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={
+          <PublicRoute>
+            <Signup />
+          </PublicRoute>
+        } />
+        <Route path="/login" element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        } />
 
         {/* protected route */}
         <Route path="/app" element={
